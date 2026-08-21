@@ -2,9 +2,14 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { projects } from "@/data/projects";
+import { copy, projectsEn } from "@/data/translations";
+import { useLanguage } from "./LanguageProvider";
 import { LibraryMark } from "./Ornaments";
 
 export function Library() {
+  const { locale, isEnglish } = useLanguage();
+  const text = copy[locale].library;
+  const entries = isEnglish ? projectsEn : projects;
   const railRef = useRef<HTMLDivElement>(null);
   const [canGoBack, setCanGoBack] = useState(false);
   const [canGoForward, setCanGoForward] = useState(true);
@@ -44,21 +49,21 @@ export function Library() {
       <div className="wide-container library-shell">
         <header className="library-heading">
           <div>
-            <p className="eyebrow">Arquivo de trabalho</p>
-            <h2 id="library-title">Biblioteca</h2>
+            <p className="eyebrow">{text.eyebrow}</p>
+            <h2 id="library-title">{text.title}</h2>
           </div>
-          <div className="rail-controls" aria-label="Controles da biblioteca">
-            <button type="button" onClick={() => move(-1)} disabled={!canGoBack} aria-label="Voltar um item">
+          <div className="rail-controls" aria-label={text.controls}>
+            <button type="button" onClick={() => move(-1)} disabled={!canGoBack} aria-label={text.previous}>
               ←
             </button>
-            <button type="button" onClick={() => move(1)} disabled={!canGoForward} aria-label="Avançar um item">
+            <button type="button" onClick={() => move(1)} disabled={!canGoForward} aria-label={text.next}>
               →
             </button>
           </div>
         </header>
 
-        <div className="library-rail" ref={railRef} aria-label="Arquivo horizontal de projetos">
-          {projects.map((project, index) => (
+        <div className="library-rail" ref={railRef} aria-label={text.rail}>
+          {entries.map((project, index) => (
             <article className="library-card" key={project.title}>
               <div className="library-card-topline">
                 <span>VOL. 0{index + 1}</span>
@@ -69,7 +74,7 @@ export function Library() {
                 <p>{project.client}</p>
                 <h3>{project.title}</h3>
               </div>
-              <ul aria-label="Tecnologias principais">
+              <ul aria-label={text.technologies}>
                 {project.tags.slice(0, 3).map((tag) => (
                   <li key={tag}>{tag}</li>
                 ))}

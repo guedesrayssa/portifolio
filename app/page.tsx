@@ -5,6 +5,8 @@ import { Footer } from "@/components/Footer";
 import { GlobalAffordances } from "@/components/GlobalAffordances";
 import { Hero } from "@/components/Hero";
 import { Library } from "@/components/Library";
+import { LanguageProvider } from "@/components/LanguageProvider";
+import { LocalizedSkipLink } from "@/components/LocalizedSkipLink";
 import { MotionProvider } from "@/components/MotionProvider";
 import { Principles } from "@/components/Principles";
 import { Projects } from "@/components/Projects";
@@ -37,10 +39,9 @@ const jsonLd = {
 
 export default function Home() {
   return (
-    <MotionProvider>
-      <a className="skip-link" href="#conteudo">
-        Pular para o conteúdo
-      </a>
+    <LanguageProvider>
+      <MotionProvider>
+      <LocalizedSkipLink />
       <GlobalAffordances />
       <main id="conteudo">
         <Hero hasPortrait={hasPortrait} />
@@ -58,6 +59,7 @@ export default function Home() {
           __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
         }}
       />
-    </MotionProvider>
+      </MotionProvider>
+    </LanguageProvider>
   );
 }

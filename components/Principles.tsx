@@ -2,9 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { principles } from "@/data/principles";
+import { copy, principlesEn } from "@/data/translations";
+import { useLanguage } from "./LanguageProvider";
 import { OrbitEmblem } from "./Ornaments";
 
 export function Principles() {
+  const { locale, isEnglish } = useLanguage();
+  const text = copy[locale].principle;
+  const entries = isEnglish ? principlesEn : principles;
   const sectionRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -34,18 +39,22 @@ export function Principles() {
   useEffect(() => {
     if (reducedMotion || paused || engaged || !visible) return;
     const interval = window.setInterval(() => {
-      if (!document.hidden) setActive((current) => (current + 1) % principles.length);
+      if (!document.hidden) setActive((current) => (current + 1) % entries.length);
     }, 4000);
     return () => window.clearInterval(interval);
-  }, [engaged, paused, reducedMotion, visible]);
+  }, [engaged, entries.length, paused, reducedMotion, visible]);
 
   const choose = (next: number) => {
-    const normalized = (next + principles.length) % principles.length;
+    const normalized = (next + entries.length) % entries.length;
     setActive(normalized);
-    setAnnouncement(`Princípio ${normalized + 1}: ${principles[normalized].title}`);
+    setAnnouncement(
+      isEnglish
+        ? `Principle ${normalized + 1}: ${entries[normalized].title}`
+        : `Princípio ${normalized + 1}: ${entries[normalized].title}`,
+    );
   };
 
-  const principle = principles[active];
+  const principle = entries[active];
 
   return (
     <section
@@ -62,7 +71,7 @@ export function Principles() {
     >
       <div className="principle-stage">
         <p className="principle-ordinal">
-          0{active + 1} <span>/</span> 0{principles.length}
+          0{active + 1} <span>/</span> 0{entries.length}
         </p>
         <OrbitEmblem
           className="principle-orbit"
@@ -76,7 +85,7 @@ export function Principles() {
           <i key={active} />
         </div>
         <div className="principle-controls">
-          <button type="button" onClick={() => choose(active - 1)} aria-label="Princípio anterior">
+          <button type="button" onClick={() => choose(active - 1)} aria-label={text.previous}>
             ←
           </button>
           <button
@@ -85,13 +94,13 @@ export function Principles() {
             aria-pressed={paused}
             disabled={reducedMotion}
           >
-            {paused ? "Continuar" : "Pausar"}
+            {paused ? text.resume : text.pause}
           </button>
-          <button type="button" onClick={() => choose(active + 1)} aria-label="Próximo princípio">
+          <button type="button" onClick={() => choose(active + 1)} aria-label={text.next}>
             →
           </button>
         </div>
-        <blockquote>“Toda boa estrutura começa por uma pergunta bem feita.”</blockquote>
+        <blockquote>{text.quote}</blockquote>
         <p className="sr-only" aria-live="polite" aria-atomic="true">
           {announcement}
         </p>

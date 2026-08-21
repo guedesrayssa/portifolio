@@ -1,11 +1,23 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { site } from "@/data/site";
+import { LuLanguages, LuMenu, LuX } from "react-icons/lu";
+import { copy } from "@/data/translations";
+import { useLanguage } from "./LanguageProvider";
+
+const destinations = [
+  { id: "trajetoria", key: "experience" },
+  { id: "habilidades", key: "skills" },
+  { id: "projetos", key: "projects" },
+  { id: "principios", key: "principles" },
+] as const;
 
 export function GlobalAffordances() {
   const cursorRef = useRef<HTMLSpanElement>(null);
   const [showTop, setShowTop] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { locale, isEnglish, toggleLocale } = useLanguage();
+  const text = copy[locale];
 
   useEffect(() => {
     const update = () => setShowTop(window.scrollY > window.innerHeight * 0.7);
@@ -48,19 +60,70 @@ export function GlobalAffordances() {
     };
   }, []);
 
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <>
       <header className="global-chrome">
-        <a className="chrome-mark" href="#inicio" aria-label="Ir para o início">RGF</a>
-        <a className="contact-shortcut" href={`mailto:${site.email}`} aria-label={`Escrever para ${site.name}`}>
-          <span aria-hidden="true">✉</span>
+        <a className="chrome-mark" href="#inicio" aria-label={text.a11y.goHome} onClick={closeMenu}>
+          <span>R</span>GF
         </a>
+
+        <nav className="mini-nav" aria-label={text.a11y.primaryNav}>
+          {destinations.map((destination) => (
+            <a href={`#${destination.id}`} key={destination.id}>
+              {text.nav[destination.key]}
+            </a>
+          ))}
+        </nav>
+
+        <div className="chrome-actions">
+          <button
+            className="language-toggle"
+            type="button"
+            onClick={toggleLocale}
+            aria-label={isEnglish ? "Mudar para português" : "Switch to English"}
+          >
+            <LuLanguages aria-hidden="true" />
+            <span>{isEnglish ? "PT" : "EN"}</span>
+          </button>
+          <a className="contact-pill" href="#contato">
+            {text.nav.contact}
+          </a>
+          <button
+            className="menu-toggle"
+            type="button"
+            onClick={() => setMenuOpen((current) => !current)}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
+            aria-label={menuOpen ? text.a11y.closeMenu : text.a11y.openMenu}
+          >
+            {menuOpen ? <LuX aria-hidden="true" /> : <LuMenu aria-hidden="true" />}
+          </button>
+        </div>
+
+        <nav
+          className={`mobile-nav${menuOpen ? " is-open" : ""}`}
+          id="mobile-navigation"
+          aria-label={text.a11y.primaryNav}
+          aria-hidden={!menuOpen}
+        >
+          {destinations.map((destination) => (
+            <a href={`#${destination.id}`} key={destination.id} onClick={closeMenu} tabIndex={menuOpen ? 0 : -1}>
+              {text.nav[destination.key]}
+            </a>
+          ))}
+          <a href="#contato" onClick={closeMenu} tabIndex={menuOpen ? 0 : -1}>
+            {text.nav.contact}
+          </a>
+        </nav>
       </header>
+
       <button
         className={`scroll-top${showTop ? " is-visible" : ""}`}
         type="button"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        aria-label="Voltar ao topo"
+        aria-label={text.a11y.backToTop}
         tabIndex={showTop ? 0 : -1}
       >
         ↑
