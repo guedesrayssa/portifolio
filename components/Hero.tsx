@@ -1,11 +1,18 @@
+"use client";
+
 import Image from "next/image";
 import { site } from "@/data/site";
+import { copy } from "@/data/translations";
 import { AmbientCanvas } from "./AmbientCanvas";
+import { useLanguage } from "./LanguageProvider";
 import { HeroWireframe } from "./Ornaments";
 
 const title = ["SOFTWARE", "DEVELOPER"] as const;
 
 export function Hero({ hasPortrait }: { hasPortrait: boolean }) {
+  const { locale } = useLanguage();
+  const text = copy[locale];
+
   return (
     <section className="hero" id="inicio" aria-labelledby="hero-title">
       <AmbientCanvas className="ambient-canvas" />
@@ -21,8 +28,8 @@ export function Hero({ hasPortrait }: { hasPortrait: boolean }) {
         <div className="hero-bust-wrap" aria-hidden={!hasPortrait}>
           <Image
             className="hero-bust"
-            src={hasPortrait ? "/rayssa.jpg" : "/classical-bust.png"}
-            alt={hasPortrait ? "Retrato de Rayssa Guedes França" : ""}
+            src={hasPortrait ? "/rayssa.jpg" : "/classical-bust-geometric.png"}
+            alt={hasPortrait ? (locale === "en" ? "Portrait of Rayssa Guedes França" : "Retrato de Rayssa Guedes França") : ""}
             fill
             priority
             sizes="(max-width: 767px) 310px, 450px"
@@ -50,7 +57,7 @@ export function Hero({ hasPortrait }: { hasPortrait: boolean }) {
         <p className="hero-name">{site.name}</p>
         <p className="hero-role">{site.role}</p>
         <span className="hero-rule" aria-hidden="true" />
-        <nav className="hero-socials" aria-label="Perfis sociais">
+        <nav className="hero-socials" aria-label={text.a11y.socialProfiles}>
           <a href={site.github} target="_blank" rel="noreferrer">
             GitHub
           </a>
@@ -61,7 +68,7 @@ export function Hero({ hasPortrait }: { hasPortrait: boolean }) {
       </div>
 
       <a className="descend" href="#trajetoria">
-        <span>Descender</span>
+        <span>{text.hero.explore}</span>
         <i aria-hidden="true" />
       </a>
     </section>

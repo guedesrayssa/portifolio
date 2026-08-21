@@ -10,9 +10,9 @@ export default function Icon() {
       <div
         style={{
           alignItems: "center",
-          background: "#0a0a09",
-          border: "2px solid #ad8b58",
-          color: "#f1eee5",
+          background: "#0d1218",
+          border: "2px solid #9da8b5",
+          color: "#edf1f5",
           display: "flex",
           fontFamily: "serif",
           fontSize: 23,
