@@ -1,12 +1,17 @@
+"use client";
+
+import { SiGithub } from "react-icons/si";
 import { projects } from "@/data/projects";
+import { copy, projectsEn } from "@/data/translations";
+import { useLanguage } from "./LanguageProvider";
 import { Reveal } from "./Reveal";
 import { TagList } from "./TagList";
 
-function ProjectVisual({ index, title }: { index: number; title: string }) {
+function ProjectVisual({ index, title, archive }: { index: number; title: string; archive: string }) {
   return (
     <div className="project-art" data-variant={index + 1} aria-hidden="true">
       <div className="project-art-grid" />
-      <span className="project-art-index">ARCHIVE / 0{index + 1}</span>
+      <span className="project-art-index">{archive} / 0{index + 1}</span>
       <span className="project-art-title">{title}</span>
       <div className="project-art-glyph">
         <i />
@@ -22,39 +27,56 @@ function ProjectVisual({ index, title }: { index: number; title: string }) {
 }
 
 export function Projects() {
+  const { locale, isEnglish } = useLanguage();
+  const text = copy[locale].projects;
+  const entries = isEnglish ? projectsEn : projects;
+
   return (
     <section className="projects paper-section" id="projetos" aria-labelledby="projects-title">
       <div className="wide-container">
         <Reveal className="projects-heading">
           <div>
-            <p className="eyebrow">Trabalhos escolhidos</p>
-            <h2 id="projects-title">Obras selecionadas</h2>
+            <p className="eyebrow">{text.eyebrow}</p>
+            <h2 id="projects-title">{text.title}</h2>
           </div>
-          <p>
-            Sistemas construídos a partir de desafios reais, com tecnologia aplicada a decisões, operações e escala.
-          </p>
+          <p>{text.intro}</p>
         </Reveal>
 
-        <div className="project-grid">
-          {projects.map((project, index) => (
-            <Reveal className="project-tile" delay={(index % 2) * 0.12} key={project.title}>
-              <article>
-                <ProjectVisual index={index} title={project.title} />
-                <div className="project-kicker">
-                  <span>{project.client}</span>
-                  <time>{project.period}</time>
-                </div>
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-                <TagList tags={project.tags} />
-                {project.githubUrl ? (
-                  <a className="project-link" href={project.githubUrl} target="_blank" rel="noreferrer">
-                    Ver projeto <span aria-hidden="true">↗</span>
-                  </a>
-                ) : null}
-              </article>
-            </Reveal>
-          ))}
+        <div className="project-list">
+          {entries.map((project, index) => {
+            const isProfileFallback = project.githubUrl === "https://github.com/guedesrayssa";
+
+            return (
+              <Reveal className="project-feature" delay={Math.min(index * 0.06, 0.18)} key={project.title}>
+                <article>
+                  <ProjectVisual index={index} title={project.title} archive={text.archive} />
+                  <div className="project-copy">
+                    <p className="project-number">PROJECT 0{index + 1}</p>
+                    <div className="project-kicker">
+                      <span>{project.client}</span>
+                      <time>{project.period}</time>
+                    </div>
+                    <h3>{project.title}</h3>
+                    <p>{project.description}</p>
+                    <TagList tags={project.tags} />
+                    {project.githubUrl ? (
+                      <a
+                        className="project-link"
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${text.githubLabel}: ${project.title}`}
+                      >
+                        <SiGithub aria-hidden="true" />
+                        <span>{isProfileFallback ? text.profile : text.code}</span>
+                        <i aria-hidden="true">↗</i>
+                      </a>
+                    ) : null}
+                  </div>
+                </article>
+              </Reveal>
+            );
+          })}
         </div>
 
         <Reveal className="projects-cta">
@@ -63,7 +85,7 @@ export function Projects() {
             <i className="corner corner-tr" aria-hidden="true" />
             <i className="corner corner-bl" aria-hidden="true" />
             <i className="corner corner-br" aria-hidden="true" />
-            Construir algo relevante
+            {text.cta}
           </a>
         </Reveal>
       </div>

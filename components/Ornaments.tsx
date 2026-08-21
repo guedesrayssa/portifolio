@@ -42,25 +42,6 @@ export function BotanicalBranch({ className }: OrnamentProps) {
   );
 }
 
-export function TimelinePilaster({ className }: OrnamentProps) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 48 1000"
-      preserveAspectRatio="none"
-      fill="none"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <path d="M4 1h40v7H4zM8 8h32v7H8zM12 15h24v12H12z" />
-      <path d="M14 27h20v936H14z" />
-      <path d="M18 30v930M22 30v930M26 30v930M30 30v930" />
-      <path d="M12 963h24v12H12zM8 975h32v9H8zM4 984h40v15H4z" />
-      <path d="M0 999h48" />
-    </svg>
-  );
-}
-
 export function PillarCap({ className }: OrnamentProps) {
   return (
     <svg

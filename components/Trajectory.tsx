@@ -1,25 +1,35 @@
+"use client";
+
 import { experiences } from "@/data/experiences";
-import { BotanicalBranch, TimelinePilaster } from "./Ornaments";
+import { copy, experiencesEn } from "@/data/translations";
+import { BotanicalBranch } from "./Ornaments";
 import { Reveal } from "./Reveal";
 import { TagList } from "./TagList";
+import { useLanguage } from "./LanguageProvider";
 
 export function Trajectory() {
+  const { locale, isEnglish } = useLanguage();
+  const text = copy[locale].trajectory;
+  const entries = isEnglish ? experiencesEn : experiences;
+
   return (
     <section className="chronicles paper-section" id="trajetoria" aria-labelledby="chronicles-title">
       <div className="chronicles-container">
         <Reveal className="editorial-heading editorial-heading-dark">
           <BotanicalBranch className="branch-ornament" />
-          <p className="eyebrow">Crônicas de uma trajetória</p>
-          <h2 id="chronicles-title">Experiência</h2>
-          <p>
-            Uma linha contínua entre engenharia, dados, liderança e impacto mensurável.
-          </p>
+          <p className="eyebrow">{text.eyebrow}</p>
+          <h2 id="chronicles-title">{text.title}</h2>
+          <p>{text.intro}</p>
         </Reveal>
 
         <div className="chronicle-line">
-          <TimelinePilaster className="timeline-pilaster" />
+          <div className="timeline-pilaster" aria-hidden="true">
+            <span className="timeline-cap" />
+            <span className="timeline-shaft" />
+            <span className="timeline-base" />
+          </div>
           <ol className="chronicle-list">
-            {experiences.map((experience, index) => (
+            {entries.map((experience, index) => (
               <li key={`${experience.title}-${experience.period}`}>
                 <Reveal delay={Math.min(index * 0.06, 0.24)} direction="right">
                   <article className="chronicle-entry">
