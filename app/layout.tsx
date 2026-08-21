@@ -1,0 +1,106 @@
+import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
+import "./globals.css";
+
+const display = localFont({
+  variable: "--font-display",
+  src: [
+    { path: "./fonts/cinzel-decorative-400-latin.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/cinzel-decorative-700-latin.woff2", weight: "700", style: "normal" },
+  ],
+  display: "swap",
+});
+
+const editorial = localFont({
+  variable: "--font-editorial",
+  src: "./fonts/cinzel-latin.woff2",
+  weight: "400 900",
+  display: "swap",
+});
+
+const body = localFont({
+  variable: "--font-body",
+  src: "./fonts/inter-latin.woff2",
+  weight: "100 900",
+  display: "swap",
+});
+
+const title = "Rayssa Guedes França | Software Developer";
+const description =
+  "Portfólio de Rayssa Guedes França, desenvolvedora de software e estudante de Ciência da Computação no Inteli, com experiência em software, dados e inteligência artificial.";
+const configuredUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : undefined);
+const socialImage = configuredUrl ? new URL("/og.png", configuredUrl).toString() : undefined;
+
+export const metadata: Metadata = {
+  title,
+  description,
+  applicationName: "Portfólio de Rayssa Guedes França",
+  authors: [{ name: "Rayssa Guedes França" }],
+  creator: "Rayssa Guedes França",
+  keywords: [
+    "Rayssa Guedes França",
+    "Software Developer",
+    "Desenvolvedora de Software",
+    "Python",
+    "React",
+    "Next.js",
+    "Ciência da Computação",
+  ],
+  ...(configuredUrl
+    ? {
+        metadataBase: new URL(configuredUrl),
+        alternates: { canonical: "/" },
+      }
+    : {}),
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    title,
+    description,
+    siteName: "Rayssa Guedes França",
+    ...(socialImage
+      ? {
+          url: configuredUrl,
+          images: [
+            {
+              url: socialImage,
+              width: 1200,
+              height: 630,
+              alt: "Rayssa Guedes França — Software Developer",
+            },
+          ],
+        }
+      : {}),
+  },
+  twitter: {
+    card: socialImage ? "summary_large_image" : "summary",
+    title,
+    description,
+    ...(socialImage ? { images: [socialImage] } : {}),
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+export const viewport: Viewport = {
+  colorScheme: "dark",
+  themeColor: "#101010",
+  width: "device-width",
+  initialScale: 1,
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang="pt-BR">
+      <body className={`${display.variable} ${editorial.variable} ${body.variable}`}>
+        {children}
+      </body>
+    </html>
+  );
+}
