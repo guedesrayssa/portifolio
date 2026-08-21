@@ -33,7 +33,7 @@ const configuredUrl =
   (process.env.VERCEL_PROJECT_PRODUCTION_URL
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
     : undefined);
-const socialImage = configuredUrl ? new URL("/og.png", configuredUrl).toString() : undefined;
+const socialImage = configuredUrl ? new URL("/og-silver.png", configuredUrl).toString() : undefined;
 
 export const metadata: Metadata = {
   title,
