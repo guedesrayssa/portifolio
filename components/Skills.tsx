@@ -71,18 +71,16 @@ export function Skills() {
               <article className="pillar-card">
                 <PillarCap className="pillar-cap" />
                 <div className="pillar-shaft">
-                  <p className="pillar-index">0{groupIndex + 1}</p>
                   <p className="pillar-subtitle">{group.subtitle}</p>
                   <h3>{group.title}</h3>
                   <ul>
-                    {group.items.map((item, itemIndex) => (
-                      <li key={item} style={{ "--skill-order": itemIndex } as React.CSSProperties}>
+                    {group.items.map((item) => (
+                      <li key={item}>
                         {(() => {
                           const SkillIcon = skillIcons[item] ?? LuBraces;
                           return <SkillIcon className="skill-icon" aria-hidden="true" />;
                         })()}
                         <span>{item}</span>
-                        <i aria-hidden="true" />
                       </li>
                     ))}
                   </ul>

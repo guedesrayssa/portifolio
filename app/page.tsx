@@ -3,7 +3,6 @@ import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { GlobalAffordances } from "@/components/GlobalAffordances";
 import { Hero } from "@/components/Hero";
-import { Library } from "@/components/Library";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { LocalizedSkipLink } from "@/components/LocalizedSkipLink";
 import { MotionProvider } from "@/components/MotionProvider";
@@ -47,7 +46,6 @@ export default function Home() {
           <Trajectory />
           <Skills />
           <Projects />
-          <Library />
           <Principles />
           <Contact />
         </main>

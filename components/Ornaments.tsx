@@ -113,19 +113,3 @@ export function OrbitEmblem({ className, style }: OrnamentProps) {
     </svg>
   );
 }
-
-export function LibraryMark({ className }: OrnamentProps) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 100 60"
-      fill="none"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <path d="M5 52h90M11 46h78M17 40h66M22 40V20h56v20" />
-      <path d="m19 20 31-14 31 14H19ZM31 23v14M43 23v14M57 23v14M69 23v14" />
-      <circle cx="50" cy="15" r="3" />
-    </svg>
-  );
-}

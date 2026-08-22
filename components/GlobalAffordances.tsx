@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { LuLanguages, LuMenu, LuX } from "react-icons/lu";
 import { copy } from "@/data/translations";
 import { useLanguage } from "./LanguageProvider";
@@ -9,12 +9,10 @@ const destinations = [
   { id: "trajetoria", key: "experience" },
   { id: "habilidades", key: "skills" },
   { id: "projetos", key: "projects" },
-  { id: "biblioteca", key: "library" },
   { id: "principios", key: "principles" },
 ] as const;
 
 export function GlobalAffordances() {
-  const cursorRef = useRef<HTMLSpanElement>(null);
   const [showTop, setShowTop] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("inicio");
@@ -45,40 +43,6 @@ export function GlobalAffordances() {
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const finePointer = window.matchMedia("(pointer: fine)");
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (!finePointer.matches || reducedMotion.matches) return;
-
-    const cursor = cursorRef.current;
-    if (!cursor) return;
-    let frame = 0;
-    let x = -40;
-    let y = -40;
-
-    const paint = () => {
-      cursor.style.transform = `translate3d(${x + 12}px, ${y + 12}px, 0) rotate(-34deg)`;
-      frame = 0;
-    };
-    const move = (event: PointerEvent) => {
-      x = event.clientX;
-      y = event.clientY;
-      cursor.classList.add("is-visible");
-      const target = event.target instanceof Element ? event.target : null;
-      cursor.classList.toggle("is-active", Boolean(target?.closest("a, button, input, textarea")));
-      if (!frame) frame = window.requestAnimationFrame(paint);
-    };
-    const leave = () => cursor.classList.remove("is-visible");
-
-    window.addEventListener("pointermove", move, { passive: true });
-    document.documentElement.addEventListener("mouseleave", leave);
-    return () => {
-      window.cancelAnimationFrame(frame);
-      window.removeEventListener("pointermove", move);
-      document.documentElement.removeEventListener("mouseleave", leave);
-    };
   }, []);
 
   const closeMenu = () => setMenuOpen(false);
@@ -165,7 +129,6 @@ export function GlobalAffordances() {
       >
         ↑
       </button>
-      <span className="leaf-cursor" ref={cursorRef} aria-hidden="true"><i /></span>
     </>
   );
 }
