@@ -1,6 +1,5 @@
 "use client";
 
-import { LuLibraryBig } from "react-icons/lu";
 import { SiGithub } from "react-icons/si";
 import { projects } from "@/data/projects";
 import { copy, projectsEn } from "@/data/translations";
@@ -35,13 +34,18 @@ export function Projects() {
   return (
     <section className="projects paper-section" id="projetos" aria-labelledby="projects-title">
       <div className="wide-container">
-        <Reveal className="projects-library-sign">
-          <LuLibraryBig aria-hidden="true" />
-          <h2 id="projects-title">The Library</h2>
-        </Reveal>
-
         <Reveal className="projects-heading">
-          <p className="eyebrow">{text.eyebrow} · {text.title}</p>
+          <div className="projects-heading-lockup">
+            <div className="projects-library-icon" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </div>
+            <div>
+              <p className="eyebrow">{text.eyebrow}</p>
+              <h2 id="projects-title">{text.title}</h2>
+            </div>
+          </div>
           <p>{text.intro}</p>
         </Reveal>
 
