@@ -27,7 +27,7 @@ const body = localFont({
 
 const title = "Rayssa Guedes França | Software Engineer";
 const description =
-  "Portfólio de Rayssa Guedes França, engenheira de software e estudante de Ciência da Computação no Inteli, com experiência em software, dados e inteligência artificial.";
+  "Portfolio of Rayssa Guedes França, software engineer and Computer Science student at Inteli, focused on software engineering and artificial intelligence.";
 const configuredUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
   (process.env.VERCEL_PROJECT_PRODUCTION_URL
@@ -58,7 +58,8 @@ export const metadata: Metadata = {
     : {}),
   openGraph: {
     type: "website",
-    locale: "pt_BR",
+    locale: "en_US",
+    alternateLocale: "pt_BR",
     title,
     description,
     siteName: "Rayssa Guedes França",
@@ -97,7 +98,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="en">
       <body className={`${display.variable} ${editorial.variable} ${body.variable}`}>
         {children}
       </body>

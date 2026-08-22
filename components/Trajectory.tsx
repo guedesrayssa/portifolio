@@ -1,8 +1,9 @@
 "use client";
 
+import { education } from "@/data/education";
 import { experiences } from "@/data/experiences";
-import { copy, experiencesEn } from "@/data/translations";
-import { BotanicalBranch } from "./Ornaments";
+import { copy, educationEn, experiencesEn } from "@/data/translations";
+import { BotanicalBranch, ScholarMark } from "./Ornaments";
 import { Reveal } from "./Reveal";
 import { TagList } from "./TagList";
 import { useLanguage } from "./LanguageProvider";
@@ -11,6 +12,7 @@ export function Trajectory() {
   const { locale, isEnglish } = useLanguage();
   const text = copy[locale].trajectory;
   const entries = isEnglish ? experiencesEn : experiences;
+  const studies = isEnglish ? educationEn : education;
 
   return (
     <section className="chronicles paper-section" id="trajetoria" aria-labelledby="chronicles-title">
@@ -51,6 +53,34 @@ export function Trajectory() {
               </li>
             ))}
           </ol>
+        </div>
+
+        <div className="education-block" aria-labelledby="education-title">
+          <Reveal className="education-intro">
+            <ScholarMark className="education-mark" />
+            <p className="eyebrow">{text.educationEyebrow}</p>
+            <h3 id="education-title">{text.educationTitle}</h3>
+          </Reveal>
+
+          <div className="education-grid">
+            {studies.map((study, index) => (
+              <Reveal delay={Math.min(index * 0.08, 0.2)} key={study.institution}>
+                <article className="education-card">
+                  <header>
+                    <p className="education-degree">{study.degree}</p>
+                    <time>{study.period}</time>
+                  </header>
+                  <p className="education-institution">{study.institution}</p>
+                  {study.note ? <span className="education-note">{study.note}</span> : null}
+                  <ul>
+                    {study.bullets.map((bullet) => (
+                      <li key={bullet}>{bullet}</li>
+                    ))}
+                  </ul>
+                </article>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -51,12 +51,4 @@ export const experiences: readonly Experience[] = [
       "Liderança de equipe de 6 pessoas, com metas, análise de desempenho e estratégias comerciais, contribuindo para aumento de 20% nos resultados nos primeiros três meses.",
     ],
   },
-  {
-    title: "Início da jornada em Computação",
-    period: "ABR 2023",
-    bullets: [
-      "Ciência e Tecnologia na UFABC — depois bolsista integral em Ciência da Computação no Inteli.",
-    ],
-    milestone: true,
-  },
 ] as const;

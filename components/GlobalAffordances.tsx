@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { LuMenu, LuX } from "react-icons/lu";
 import { copy } from "@/data/translations";
 import { useLanguage } from "./LanguageProvider";
+import { MementoSkull } from "./Ornaments";
 
 const destinations = [
   { id: "trajetoria", key: "experience" },
@@ -51,7 +52,7 @@ export function GlobalAffordances() {
     <>
       <header className="global-chrome">
         <a className="chrome-mark" href="#inicio" aria-label={text.a11y.goHome} onClick={closeMenu}>
-          <span>R</span>GF
+          <MementoSkull className="chrome-skull" />
         </a>
 
         <nav className="mini-nav" aria-label={text.a11y.primaryNav}>

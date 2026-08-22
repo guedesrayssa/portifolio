@@ -40,3 +40,7 @@ yarn-error.log*
 /.wrangler/
 /outputs/
 /work/
+
+# original uncompressed source art
+/assets-source/
+/tmp/

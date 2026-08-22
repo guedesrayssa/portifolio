@@ -4,10 +4,12 @@ import { Footer } from "@/components/Footer";
 import { GlobalAffordances } from "@/components/GlobalAffordances";
 import { Hero } from "@/components/Hero";
 import { LanguageProvider } from "@/components/LanguageProvider";
+import { LeafCursor } from "@/components/LeafCursor";
 import { LocalizedSkipLink } from "@/components/LocalizedSkipLink";
 import { MotionProvider } from "@/components/MotionProvider";
 import { Principles } from "@/components/Principles";
 import { Projects } from "@/components/Projects";
+import { SectionDivider } from "@/components/SectionDivider";
 import { Skills } from "@/components/Skills";
 import { Trajectory } from "@/components/Trajectory";
 import { site } from "@/data/site";
@@ -40,13 +42,19 @@ export default function Home() {
       <MotionProvider>
         <LocalizedSkipLink />
         <GlobalAffordances />
+        <LeafCursor />
         <main id="conteudo">
           <Hero />
           <About />
+          <SectionDivider tone="light" />
           <Trajectory />
+          <SectionDivider tone="dark" />
           <Skills />
+          <SectionDivider tone="light" />
           <Projects />
+          <SectionDivider tone="light" />
           <Principles />
+          <SectionDivider tone="dark" />
           <Contact />
         </main>
         <Footer />

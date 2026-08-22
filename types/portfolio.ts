@@ -13,8 +13,22 @@ export type SkillGroup = {
   items: readonly string[];
 };
 
+export type Education = {
+  institution: string;
+  degree: string;
+  period: string;
+  note?: string;
+  bullets: readonly string[];
+};
+
 export type Principle = {
   title: string;
+  body: string;
+};
+
+export type Maxim = {
+  title: string;
+  translation: string;
   body: string;
 };
 
@@ -24,6 +38,7 @@ export type Project = {
   period: string;
   description: string;
   tags: readonly string[];
+  cover: string;
   accent: "bronze" | "slate" | "ember" | "olive";
   githubUrl?: string;
 };

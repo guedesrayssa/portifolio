@@ -13,7 +13,7 @@ type LanguageContextValue = {
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocale] = useState<Locale>("pt");
+  const [locale, setLocale] = useState<Locale>("en");
 
   useEffect(() => {
     document.documentElement.lang = locale === "en" ? "en" : "pt-BR";

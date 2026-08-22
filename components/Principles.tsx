@@ -1,15 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { principles } from "@/data/principles";
-import { copy, principlesEn } from "@/data/translations";
+import { maxims } from "@/data/maxims";
+import { copy, maximsEn } from "@/data/translations";
 import { useLanguage } from "./LanguageProvider";
 import { OrbitEmblem } from "./Ornaments";
 
 export function Principles() {
   const { locale, isEnglish } = useLanguage();
   const text = copy[locale].principle;
-  const entries = isEnglish ? principlesEn : principles;
+  const entries = isEnglish ? maximsEn : maxims;
   const sectionRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -41,7 +41,7 @@ export function Principles() {
     return () => window.clearInterval(interval);
   }, [entries.length, reducedMotion, visible]);
 
-  const principle = entries[active];
+  const maxim = entries[active];
 
   return (
     <section
@@ -59,8 +59,9 @@ export function Principles() {
           style={{ transform: `rotate(${active * 120}deg)` } as React.CSSProperties}
         />
         <div className="principle-copy" key={active}>
-          <h2 id="principle-title">{principle.title}</h2>
-          <p>{principle.body}</p>
+          <h2 id="principle-title">{maxim.title}</h2>
+          <p className="principle-translation">{maxim.translation}</p>
+          <p>{maxim.body}</p>
         </div>
         <div className="principle-progress" aria-hidden="true">
           <i key={active} />
