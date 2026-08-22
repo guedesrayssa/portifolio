@@ -12,6 +12,8 @@ export const copy = {
       socialProfiles: "Perfis sociais",
     },
     nav: {
+      home: "Início",
+      about: "Sobre",
       experience: "Experiência",
       skills: "Skills",
       projects: "Projetos",
@@ -19,6 +21,22 @@ export const copy = {
       contact: "Contato",
     },
     hero: { explore: "Explorar" },
+    about: {
+      eyebrow: "Sobre mim",
+      title: "Código, estratégia e impacto.",
+      bodyPrimary:
+        "Sou estudante de Ciência da Computação no Inteli e engenheira de software com experiência em desenvolvimento full stack, dados e inteligência artificial. Trabalho com Python, Java, JavaScript e SQL para transformar problemas reais em sistemas escaláveis.",
+      bodySecondary:
+        "Como vice-presidente da Inteli Júnior, também lidero pessoas, projetos e decisões de negócio. Quero construir produtos que conectem tecnologia, pessoas e impacto mensurável.",
+      education: "Ciência da Computação · Inteli",
+      educationLabel: "Formação",
+      focus: "Full stack · Dados · IA",
+      focusLabel: "Foco",
+      location: "São Paulo · Brasil",
+      locationLabel: "Base",
+      portraitAlt: "Retrato de Rayssa Guedes França",
+      folio: "Perfil · MMXXVI",
+    },
     trajectory: {
       eyebrow: "Crônicas de uma trajetória",
       title: "Experiência",
@@ -85,6 +103,8 @@ export const copy = {
       socialProfiles: "Social profiles",
     },
     nav: {
+      home: "Home",
+      about: "About",
       experience: "Experience",
       skills: "Skills",
       projects: "Projects",
@@ -92,6 +112,22 @@ export const copy = {
       contact: "Contact",
     },
     hero: { explore: "Explore" },
+    about: {
+      eyebrow: "About me",
+      title: "Code, strategy, and impact.",
+      bodyPrimary:
+        "I am a Computer Science student at Inteli and a software engineer with experience across full-stack development, data, and artificial intelligence. I use Python, Java, JavaScript, and SQL to turn real-world problems into scalable systems.",
+      bodySecondary:
+        "As Vice President of Inteli Júnior, I also lead people, projects, and business decisions. I want to build products that connect technology, people, and measurable impact.",
+      education: "Computer Science · Inteli",
+      educationLabel: "Education",
+      focus: "Full stack · Data · AI",
+      focusLabel: "Focus",
+      location: "São Paulo · Brazil",
+      locationLabel: "Based in",
+      portraitAlt: "Portrait of Rayssa Guedes França",
+      folio: "Profile · MMXXVI",
+    },
     trajectory: {
       eyebrow: "Chronicles of a journey",
       title: "Experience",

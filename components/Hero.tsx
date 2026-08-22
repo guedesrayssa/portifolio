@@ -6,10 +6,11 @@ import { copy } from "@/data/translations";
 import { AmbientCanvas } from "./AmbientCanvas";
 import { useLanguage } from "./LanguageProvider";
 import { HeroWireframe } from "./Ornaments";
+import { SocialLinks } from "./SocialLinks";
 
-const title = ["SOFTWARE", "DEVELOPER"] as const;
+const title = ["SOFTWARE", "ENGINEER"] as const;
 
-export function Hero({ hasPortrait }: { hasPortrait: boolean }) {
+export function Hero() {
   const { locale } = useLanguage();
   const text = copy[locale];
 
@@ -25,18 +26,18 @@ export function Hero({ hasPortrait }: { hasPortrait: boolean }) {
       <div className="hero-stack">
         <HeroWireframe className="hero-wireframe" />
 
-        <div className="hero-bust-wrap" aria-hidden={!hasPortrait}>
+        <div className="hero-bust-wrap" aria-hidden="true">
           <Image
             className="hero-bust"
-            src={hasPortrait ? "/rayssa.jpg" : "/classical-bust-geometric.png"}
-            alt={hasPortrait ? (locale === "en" ? "Portrait of Rayssa Guedes França" : "Retrato de Rayssa Guedes França") : ""}
+            src="/classical-bust-geometric.png"
+            alt=""
             fill
             priority
             sizes="(max-width: 767px) 310px, 450px"
           />
         </div>
 
-        <h1 id="hero-title" className="hero-display" aria-label="Software Developer">
+        <h1 id="hero-title" className="hero-display" aria-label="Software Engineer">
           {title.map((line, lineIndex) => (
             <span className={`hero-display-line line-${lineIndex + 1}`} key={line} aria-hidden="true">
               {line.split("").map((letter, index) => (
@@ -57,17 +58,10 @@ export function Hero({ hasPortrait }: { hasPortrait: boolean }) {
         <p className="hero-name">{site.name}</p>
         <p className="hero-role">{site.role}</p>
         <span className="hero-rule" aria-hidden="true" />
-        <nav className="hero-socials" aria-label={text.a11y.socialProfiles}>
-          <a href={site.github} target="_blank" rel="noreferrer">
-            GitHub
-          </a>
-          <a href={site.linkedin} target="_blank" rel="noreferrer">
-            LinkedIn
-          </a>
-        </nav>
+        <SocialLinks className="hero-socials" />
       </div>
 
-      <a className="descend" href="#trajetoria">
+      <a className="descend" href="#sobre">
         <span>{text.hero.explore}</span>
         <i aria-hidden="true" />
       </a>

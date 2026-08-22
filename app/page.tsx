@@ -1,5 +1,4 @@
-import { existsSync } from "node:fs";
-import path from "node:path";
+import { About } from "@/components/About";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { GlobalAffordances } from "@/components/GlobalAffordances";
@@ -16,14 +15,13 @@ import { site } from "@/data/site";
 
 export const dynamic = "force-static";
 
-const hasPortrait = existsSync(path.join(process.cwd(), "public", "rayssa.jpg"));
-
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: site.name,
   jobTitle: site.role,
   email: `mailto:${site.email}`,
+  sameAs: [site.github, site.linkedin],
   address: {
     "@type": "PostalAddress",
     addressLocality: "São Paulo",
@@ -41,24 +39,25 @@ export default function Home() {
   return (
     <LanguageProvider>
       <MotionProvider>
-      <LocalizedSkipLink />
-      <GlobalAffordances />
-      <main id="conteudo">
-        <Hero hasPortrait={hasPortrait} />
-        <Trajectory />
-        <Skills />
-        <Projects />
-        <Library />
-        <Principles />
-        <Contact />
-      </main>
-      <Footer />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
-        }}
-      />
+        <LocalizedSkipLink />
+        <GlobalAffordances />
+        <main id="conteudo">
+          <Hero />
+          <About />
+          <Trajectory />
+          <Skills />
+          <Projects />
+          <Library />
+          <Principles />
+          <Contact />
+        </main>
+        <Footer />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
       </MotionProvider>
     </LanguageProvider>
   );
