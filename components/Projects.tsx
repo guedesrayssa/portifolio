@@ -47,7 +47,6 @@ export function Projects() {
               <h2 id="projects-title">{text.title}</h2>
             </div>
           </div>
-          <p>{text.intro}</p>
         </Reveal>
 
         <div className="project-list">

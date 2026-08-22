@@ -852,24 +852,6 @@ section[id] {
   text-wrap: balance;
 }
 
-.editorial-heading > p:last-of-type {
-  max-width: 672px;
-  margin: 24px 0 0;
-  font-family: var(--font-editorial), serif;
-  font-size: 0.78rem;
-  letter-spacing: 0.2em;
-  line-height: 1.75;
-  text-transform: uppercase;
-}
-
-.editorial-heading-dark > p:last-of-type {
-  color: rgb(26 26 26 / 0.64);
-}
-
-.editorial-heading-light > p:last-of-type {
-  color: rgb(242 242 242 / 0.66);
-}
-
 .branch-ornament {
   width: 120px;
   height: 60px;
@@ -1279,7 +1261,7 @@ section[id] {
 .projects-heading {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 48px;
   margin-bottom: clamp(64px, 7vw, 96px);
 }
@@ -1360,15 +1342,6 @@ section[id] {
   height: 46px;
   transform: rotate(-17deg);
   transform-origin: 50% 100%;
-}
-
-.projects-heading > p {
-  max-width: 512px;
-  margin: 0;
-  color: var(--body-ink);
-  font-size: 0.875rem;
-  font-weight: 300;
-  line-height: 1.625;
 }
 
 .project-list {
@@ -1786,44 +1759,6 @@ section[id] {
   transform-origin: left;
   background: var(--bronze);
   animation: principle-progress 4s linear forwards;
-}
-
-.principle-progress.is-paused i {
-  animation-play-state: paused;
-}
-
-.principle-controls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 24px;
-}
-
-.principle-controls button {
-  min-width: 44px;
-  min-height: 44px;
-  padding-inline: 14px;
-  border: 1px solid rgb(26 26 26 / 0.24);
-  background: transparent;
-  color: var(--ink);
-  cursor: pointer;
-  font-family: var(--font-editorial), serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  transition: background 300ms ease, color 300ms ease, border-color 300ms ease;
-}
-
-.principle-controls button:hover:not(:disabled),
-.principle-controls button:focus-visible:not(:disabled) {
-  border-color: var(--ink);
-  background: var(--ink);
-  color: var(--paper);
-}
-
-.principle-controls button:disabled {
-  opacity: 0.35;
-  cursor: default;
 }
 
 .principle-stage blockquote {
@@ -2354,11 +2289,6 @@ section[id] {
     font-size: clamp(1.8rem, 8.6vw, 2.25rem);
   }
 
-  .editorial-heading > p:last-of-type {
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-  }
-
   .chronicle-line {
     margin-left: 36px;
   }
@@ -2437,10 +2367,6 @@ section[id] {
   .projects-heading {
     align-items: flex-start;
     flex-direction: column;
-  }
-
-  .projects-heading > p {
-    max-width: 620px;
   }
 
   .project-list {

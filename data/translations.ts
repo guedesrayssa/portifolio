@@ -38,18 +38,15 @@ export const copy = {
     trajectory: {
       eyebrow: "Crônicas de uma trajetória",
       title: "Experiência",
-      intro: "Uma linha contínua entre engenharia, dados, liderança e impacto mensurável.",
     },
     skills: {
       eyebrow: "Os fundamentos",
       title: "Arquitetura de competências",
-      intro: "Tecnologias organizadas como uma construção: interface, estrutura e ferramentas de ofício.",
       manifesto: "Manifesto de engenharia",
     },
     projects: {
       eyebrow: "Trabalhos escolhidos",
       title: "Projetos",
-      intro: "Sistemas construídos a partir de desafios reais, com tecnologia aplicada a decisões, operações e escala.",
       archive: "ARQUIVO",
       code: "Código",
       profile: "Perfil",
@@ -57,10 +54,6 @@ export const copy = {
       githubLabel: "Abrir no GitHub",
     },
     principle: {
-      previous: "Princípio anterior",
-      next: "Próximo princípio",
-      resume: "Continuar",
-      pause: "Pausar",
       quote: "“Toda boa estrutura começa por uma pergunta bem feita.”",
     },
     contact: {
@@ -117,18 +110,15 @@ export const copy = {
     trajectory: {
       eyebrow: "Chronicles of a journey",
       title: "Experience",
-      intro: "A continuous line through engineering, data, leadership, and measurable impact.",
     },
     skills: {
       eyebrow: "Foundations",
       title: "Skills architecture",
-      intro: "Technologies organized like a structure: interface, foundations, and tools of the trade.",
       manifesto: "Engineering manifesto",
     },
     projects: {
       eyebrow: "Selected work",
       title: "Projects",
-      intro: "Systems built around real-world challenges, applying technology to decisions, operations, and scale.",
       archive: "ARCHIVE",
       code: "Code",
       profile: "Profile",
@@ -136,10 +126,6 @@ export const copy = {
       githubLabel: "Open on GitHub",
     },
     principle: {
-      previous: "Previous principle",
-      next: "Next principle",
-      resume: "Resume",
-      pause: "Pause",
       quote: "“Every good structure begins with a well-framed question.”",
     },
     contact: {

@@ -61,7 +61,6 @@ export function Skills() {
         <Reveal className="editorial-heading editorial-heading-light">
           <p className="eyebrow">{text.eyebrow}</p>
           <h2 id="foundations-title">{text.title}</h2>
-          <p>{text.intro}</p>
           <span className="heading-rule" aria-hidden="true" />
         </Reveal>
 

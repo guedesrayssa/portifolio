@@ -19,7 +19,6 @@ export function Trajectory() {
           <BotanicalBranch className="branch-ornament" />
           <p className="eyebrow">{text.eyebrow}</p>
           <h2 id="chronicles-title">{text.title}</h2>
-          <p>{text.intro}</p>
         </Reveal>
 
         <div className="chronicle-line">
