@@ -8,7 +8,7 @@ import { useLanguage } from "./LanguageProvider";
 import { HeroWireframe } from "./Ornaments";
 import { SocialLinks } from "./SocialLinks";
 
-const title = ["SOFTWARE", "ENGINEER"] as const;
+const title = ["RAYSSA GUEDES", "FRANÇA"] as const;
 
 export function Hero() {
   const { locale } = useLanguage();
@@ -18,10 +18,6 @@ export function Hero() {
     <section className="hero" id="inicio" aria-labelledby="hero-title">
       <AmbientCanvas className="ambient-canvas" />
       <div className="hero-halo" aria-hidden="true" />
-
-      <p className="hero-folio" aria-hidden="true">
-        Portfolio <span>·</span> MMXXVI
-      </p>
 
       <div className="hero-stack">
         <HeroWireframe className="hero-wireframe" />
@@ -37,7 +33,7 @@ export function Hero() {
           />
         </div>
 
-        <h1 id="hero-title" className="hero-display" aria-label="Software Engineer">
+        <h1 id="hero-title" className="hero-display" aria-label={site.name}>
           {title.map((line, lineIndex) => (
             <span className={`hero-display-line line-${lineIndex + 1}`} key={line} aria-hidden="true">
               {line.split("").map((letter, index) => (
@@ -46,7 +42,7 @@ export function Hero() {
                   key={`${letter}-${index}`}
                   style={{ animationDelay: `${420 + lineIndex * 220 + index * 42}ms` }}
                 >
-                  {letter}
+                  {letter === " " ? "\u00a0" : letter}
                 </span>
               ))}
             </span>
@@ -55,7 +51,6 @@ export function Hero() {
       </div>
 
       <div className="hero-meta">
-        <p className="hero-name">{site.name}</p>
         <p className="hero-role">{site.role}</p>
         <span className="hero-rule" aria-hidden="true" />
         <SocialLinks className="hero-socials" />

@@ -17,13 +17,13 @@ export const copy = {
       experience: "Experiência",
       skills: "Skills",
       projects: "Projetos",
+      library: "Biblioteca",
       principles: "Princípios",
       contact: "Contato",
     },
     hero: { explore: "Explorar" },
     about: {
-      eyebrow: "Sobre mim",
-      title: "Código, estratégia e impacto.",
+      title: "Sobre mim",
       bodyPrimary:
         "Sou estudante de Ciência da Computação no Inteli e engenheira de software com experiência em desenvolvimento full stack, dados e inteligência artificial. Trabalho com Python, Java, JavaScript e SQL para transformar problemas reais em sistemas escaláveis.",
       bodySecondary:
@@ -35,7 +35,6 @@ export const copy = {
       location: "São Paulo · Brasil",
       locationLabel: "Base",
       portraitAlt: "Retrato de Rayssa Guedes França",
-      folio: "Perfil · MMXXVI",
     },
     trajectory: {
       eyebrow: "Crônicas de uma trajetória",
@@ -108,13 +107,13 @@ export const copy = {
       experience: "Experience",
       skills: "Skills",
       projects: "Projects",
+      library: "Library",
       principles: "Principles",
       contact: "Contact",
     },
     hero: { explore: "Explore" },
     about: {
-      eyebrow: "About me",
-      title: "Code, strategy, and impact.",
+      title: "About me",
       bodyPrimary:
         "I am a Computer Science student at Inteli and a software engineer with experience across full-stack development, data, and artificial intelligence. I use Python, Java, JavaScript, and SQL to turn real-world problems into scalable systems.",
       bodySecondary:
@@ -126,7 +125,6 @@ export const copy = {
       location: "São Paulo · Brazil",
       locationLabel: "Based in",
       portraitAlt: "Portrait of Rayssa Guedes França",
-      folio: "Profile · MMXXVI",
     },
     trajectory: {
       eyebrow: "Chronicles of a journey",
