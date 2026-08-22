@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { LuLanguages, LuMenu, LuX } from "react-icons/lu";
+import { LuMenu, LuX } from "react-icons/lu";
 import { copy } from "@/data/translations";
 import { useLanguage } from "./LanguageProvider";
 
@@ -75,7 +75,6 @@ export function GlobalAffordances() {
             onClick={toggleLocale}
             aria-label={isEnglish ? "Mudar para português" : "Switch to English"}
           >
-            <LuLanguages aria-hidden="true" />
             <span>{isEnglish ? "PT" : "EN"}</span>
           </button>
           <a className="contact-pill" href="#contato">

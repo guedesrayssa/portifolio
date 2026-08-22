@@ -53,7 +53,7 @@ export const copy = {
       archive: "ARQUIVO",
       code: "Código",
       profile: "Perfil",
-      cta: "Construir algo relevante",
+      cta: "Ver mais no GitHub",
       githubLabel: "Abrir no GitHub",
     },
     principle: {
@@ -132,7 +132,7 @@ export const copy = {
       archive: "ARCHIVE",
       code: "Code",
       profile: "Profile",
-      cta: "Build something meaningful",
+      cta: "View more on GitHub",
       githubLabel: "Open on GitHub",
     },
     principle: {

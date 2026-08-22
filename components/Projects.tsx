@@ -2,6 +2,7 @@
 
 import { SiGithub } from "react-icons/si";
 import { projects } from "@/data/projects";
+import { site } from "@/data/site";
 import { copy, projectsEn } from "@/data/translations";
 import { useLanguage } from "./LanguageProvider";
 import { Reveal } from "./Reveal";
@@ -87,12 +88,14 @@ export function Projects() {
         </div>
 
         <Reveal className="projects-cta">
-          <a className="corner-button" href="#contato">
+          <a className="corner-button" href={site.github} target="_blank" rel="noopener noreferrer">
             <i className="corner corner-tl" aria-hidden="true" />
             <i className="corner corner-tr" aria-hidden="true" />
             <i className="corner corner-bl" aria-hidden="true" />
             <i className="corner corner-br" aria-hidden="true" />
-            {text.cta}
+            <SiGithub aria-hidden="true" />
+            <span>{text.cta}</span>
+            <i className="corner-button-arrow" aria-hidden="true">→</i>
           </a>
         </Reveal>
       </div>

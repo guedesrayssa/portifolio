@@ -322,15 +322,15 @@ section[id] {
   bottom: 24px;
   display: grid;
   visibility: hidden;
-  width: 44px;
-  height: 44px;
+  width: 64px;
+  height: 64px;
   transform: translateY(14px);
   place-items: center;
-  border: 1px solid currentColor;
-  border-radius: 50%;
+  border: 1px solid #151515;
+  border-radius: 0;
   opacity: 0;
-  background: rgb(248 250 252 / 0.9);
-  color: var(--ink);
+  background: #151515;
+  color: var(--paper);
   cursor: pointer;
   box-shadow: 0 14px 34px rgb(14 22 30 / 0.18);
   backdrop-filter: blur(12px);
@@ -1617,17 +1617,19 @@ section[id] {
 
 .projects-cta {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: clamp(96px, 10vw, 152px);
 }
 
 .corner-button {
   position: relative;
   display: inline-flex;
-  min-height: 56px;
+  min-width: min(100%, 410px);
+  min-height: 72px;
   align-items: center;
-  justify-content: center;
-  padding: 16px 32px;
+  justify-content: flex-start;
+  gap: 18px;
+  padding: 20px 48px;
   border: 2px solid var(--ink);
   font-family: var(--font-editorial), serif;
   font-size: 0.68rem;
@@ -1637,10 +1639,29 @@ section[id] {
   transition: background 300ms ease, color 300ms ease;
 }
 
+.corner-button > svg {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+}
+
+.corner-button-arrow {
+  margin-left: auto;
+  font-size: 1.2rem;
+  font-style: normal;
+  letter-spacing: 0;
+  transition: transform 300ms var(--editorial-ease);
+}
+
 .corner-button:hover,
 .corner-button:focus-visible {
   background: var(--ink);
   color: var(--paper);
+}
+
+.corner-button:hover .corner-button-arrow,
+.corner-button:focus-visible .corner-button-arrow {
+  transform: translateX(4px);
 }
 
 .corner {
@@ -2243,6 +2264,8 @@ section[id] {
   .scroll-top {
     right: 16px;
     bottom: 16px;
+    width: 52px;
+    height: 52px;
   }
 
   .hero {
