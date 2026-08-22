@@ -6,16 +6,18 @@ import { copy } from "@/data/translations";
 import { useLanguage } from "./LanguageProvider";
 
 const destinations = [
-  { id: "trajetoria", key: "experience" },
+  { id: "inicio", key: "home" },
+  { id: "sobre", key: "about" },
   { id: "habilidades", key: "skills" },
+  { id: "trajetoria", key: "experience" },
   { id: "projetos", key: "projects" },
-  { id: "principios", key: "principles" },
 ] as const;
 
 export function GlobalAffordances() {
   const cursorRef = useRef<HTMLSpanElement>(null);
   const [showTop, setShowTop] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("inicio");
   const { locale, isEnglish, toggleLocale } = useLanguage();
   const text = copy[locale];
 
@@ -24,6 +26,25 @@ export function GlobalAffordances() {
     update();
     window.addEventListener("scroll", update, { passive: true });
     return () => window.removeEventListener("scroll", update);
+  }, []);
+
+  useEffect(() => {
+    const sections = destinations
+      .map((destination) => document.getElementById(destination.id))
+      .filter((section): section is HTMLElement => Boolean(section));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const current = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((left, right) => right.intersectionRatio - left.intersectionRatio)[0];
+        if (current?.target.id) setActiveSection(current.target.id);
+      },
+      { rootMargin: "-24% 0px -58%", threshold: [0.08, 0.2, 0.45] },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -71,7 +92,13 @@ export function GlobalAffordances() {
 
         <nav className="mini-nav" aria-label={text.a11y.primaryNav}>
           {destinations.map((destination) => (
-            <a href={`#${destination.id}`} key={destination.id}>
+            <a
+              className={activeSection === destination.id ? "is-active" : undefined}
+              href={`#${destination.id}`}
+              key={destination.id}
+              aria-current={activeSection === destination.id ? "location" : undefined}
+              onClick={() => setActiveSection(destination.id)}
+            >
               {text.nav[destination.key]}
             </a>
           ))}
@@ -109,7 +136,17 @@ export function GlobalAffordances() {
           aria-hidden={!menuOpen}
         >
           {destinations.map((destination) => (
-            <a href={`#${destination.id}`} key={destination.id} onClick={closeMenu} tabIndex={menuOpen ? 0 : -1}>
+            <a
+              className={activeSection === destination.id ? "is-active" : undefined}
+              href={`#${destination.id}`}
+              key={destination.id}
+              onClick={() => {
+                setActiveSection(destination.id);
+                closeMenu();
+              }}
+              aria-current={activeSection === destination.id ? "location" : undefined}
+              tabIndex={menuOpen ? 0 : -1}
+            >
               {text.nav[destination.key]}
             </a>
           ))}
