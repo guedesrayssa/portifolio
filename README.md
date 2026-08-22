@@ -22,10 +22,9 @@ npm run build
 
 O build estático é gerado em `out/`.
 
-## Personalização pendente
+## Personalização
 
-- Adicione a foto final em `public/rayssa.jpg`. O site detecta o arquivo no build e substitui automaticamente o busto decorativo do hero.
-- Substitua os placeholders de GitHub e LinkedIn em `data/site.ts` pelos handles reais.
+- O retrato usado na seção Sobre está em `public/ray.jpg`; o busto geométrico do hero permanece em `public/classical-bust-geometric.png`.
 - Substitua os placeholders dos projetos em `components/Projects.tsx` por screenshots reais, se disponíveis.
 - Para o formulário usar um serviço web em vez do aplicativo de e-mail, conecte um endpoint real do Formspree em `components/Contact.tsx`.
 
@@ -43,4 +42,4 @@ O build estático é gerado em `out/`.
 - `components/`: seções e componentes de interação/movimento.
 - `data/`: experiências, habilidades, princípios, projetos e dados pessoais.
 - `types/`: tipos TypeScript compartilhados.
-- `public/og.png`: imagem social do portfólio.
+- `public/og-engineer.png`: imagem social do portfólio.

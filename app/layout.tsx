@@ -25,15 +25,15 @@ const body = localFont({
   display: "swap",
 });
 
-const title = "Rayssa Guedes França | Software Developer";
+const title = "Rayssa Guedes França | Software Engineer";
 const description =
-  "Portfólio de Rayssa Guedes França, desenvolvedora de software e estudante de Ciência da Computação no Inteli, com experiência em software, dados e inteligência artificial.";
+  "Portfólio de Rayssa Guedes França, engenheira de software e estudante de Ciência da Computação no Inteli, com experiência em software, dados e inteligência artificial.";
 const configuredUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
   (process.env.VERCEL_PROJECT_PRODUCTION_URL
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
     : undefined);
-const socialImage = configuredUrl ? new URL("/og-silver.png", configuredUrl).toString() : undefined;
+const socialImage = configuredUrl ? new URL("/og-engineer.png", configuredUrl).toString() : undefined;
 
 export const metadata: Metadata = {
   title,
@@ -43,8 +43,8 @@ export const metadata: Metadata = {
   creator: "Rayssa Guedes França",
   keywords: [
     "Rayssa Guedes França",
-    "Software Developer",
-    "Desenvolvedora de Software",
+    "Software Engineer",
+    "Engenheira de Software",
     "Python",
     "React",
     "Next.js",
@@ -68,9 +68,9 @@ export const metadata: Metadata = {
           images: [
             {
               url: socialImage,
-              width: 1200,
-              height: 630,
-              alt: "Rayssa Guedes França — Software Developer",
+              width: 1730,
+              height: 909,
+              alt: "Rayssa Guedes França — Software Engineer",
             },
           ],
         }
