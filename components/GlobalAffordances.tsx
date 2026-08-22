@@ -6,11 +6,11 @@ import { copy } from "@/data/translations";
 import { useLanguage } from "./LanguageProvider";
 
 const destinations = [
-  { id: "inicio", key: "home" },
-  { id: "sobre", key: "about" },
-  { id: "habilidades", key: "skills" },
   { id: "trajetoria", key: "experience" },
+  { id: "habilidades", key: "skills" },
   { id: "projetos", key: "projects" },
+  { id: "biblioteca", key: "library" },
+  { id: "principios", key: "principles" },
 ] as const;
 
 export function GlobalAffordances() {
@@ -29,8 +29,8 @@ export function GlobalAffordances() {
   }, []);
 
   useEffect(() => {
-    const sections = destinations
-      .map((destination) => document.getElementById(destination.id))
+    const sections = ["inicio", "sobre", ...destinations.map((destination) => destination.id)]
+      .map((id) => document.getElementById(id))
       .filter((section): section is HTMLElement => Boolean(section));
 
     const observer = new IntersectionObserver(
