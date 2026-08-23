@@ -354,9 +354,6 @@ section[id] {
 
 /* Hero */
 .hero {
-  --hero-glow-x: 50%;
-  --hero-glow-y: 42%;
-  --hero-glow-opacity: 0.42;
   position: relative;
   display: flex;
   min-height: max(760px, 100svh);
@@ -372,52 +369,6 @@ section[id] {
   color: var(--paper);
 }
 
-.hero::after {
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  content: "";
-  background: radial-gradient(
-    circle 270px at var(--hero-glow-x) var(--hero-glow-y),
-    rgb(222 232 242 / 0.16),
-    rgb(161 181 201 / 0.055) 45%,
-    transparent 74%
-  );
-  opacity: var(--hero-glow-opacity);
-  pointer-events: none;
-  transition: opacity 320ms ease;
-}
-
-.hero-halo {
-  position: absolute;
-  z-index: 0;
-  top: 50%;
-  left: 50%;
-  width: min(720px, 108%);
-  aspect-ratio: 1;
-  transform: translate(-50%, -50%);
-  border: 1px solid rgb(242 242 242 / 0.055);
-  border-radius: 50%;
-  box-shadow:
-    inset 0 0 110px rgb(184 194 206 / 0.04),
-    0 0 120px rgb(184 194 206 / 0.025);
-}
-
-.hero-halo::before,
-.hero-halo::after {
-  position: absolute;
-  inset: 8%;
-  border: 1px solid rgb(242 242 242 / 0.035);
-  border-radius: inherit;
-  content: "";
-}
-
-.hero-halo::after {
-  inset: 49.7%;
-  border-color: var(--bronze);
-  opacity: 0.5;
-}
-
 .hero-shell {
   position: relative;
   z-index: 2;
@@ -425,7 +376,7 @@ section[id] {
   width: min(100%, 1320px);
   align-items: center;
   gap: clamp(28px, 4vw, 72px);
-  grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
 }
 
 .hero-lede {
@@ -439,83 +390,17 @@ section[id] {
   place-items: center;
 }
 
-.hero-wireframe {
-  position: absolute;
-  z-index: 20;
-  top: 50%;
-  left: 50%;
-  width: min(430px, 84%);
-  height: auto;
-  transform: translate(-50%, -50%);
-  opacity: 0.3;
-  stroke: var(--paper-soft);
-  stroke-width: 0.7;
-  vector-effect: non-scaling-stroke;
-}
-
-.hero-wireframe circle,
-.hero-wireframe path:nth-child(n + 3) {
-  stroke-width: 0.35;
-}
-
-.hero-bust-wrap {
-  position: relative;
-  z-index: 10;
-  height: clamp(400px, 62vh, 660px);
-  aspect-ratio: 400 / 560;
-  transform-origin: 50% 100%;
-  animation: bust-enter 1.5s 0.2s both cubic-bezier(0.33, 1, 0.68, 1);
-}
-
-.hero-bust {
-  width: 100%;
-  height: 100%;
-  fill: none;
-  stroke: var(--paper-soft);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  filter: drop-shadow(0 18px 40px rgb(0 0 0 / 0.6));
-}
-
-.hero-bust g {
-  animation: bust-draw 2.6s both var(--editorial-ease);
-}
-
-.hero-bust path,
-.hero-bust circle {
-  stroke-dasharray: 2600;
-  stroke-dashoffset: 2600;
-  animation: bust-trace 3.2s 0.3s both cubic-bezier(0.33, 1, 0.68, 1);
-}
-
-.hero-bust .bust-hair {
-  opacity: 0.42;
-  stroke-width: 0.9;
-  animation-delay: 0.15s;
-}
-
-.hero-bust .bust-face {
-  opacity: 0.76;
-  stroke-width: 1.1;
-  animation-delay: 0.35s;
-}
-
-.hero-bust .bust-features {
-  opacity: 0.9;
-  stroke-width: 1.2;
-  animation-delay: 0.75s;
-}
-
-.hero-bust .bust-body {
-  opacity: 0.55;
-  stroke-width: 1;
-  animation-delay: 0.55s;
-}
-
-.hero-bust .bust-plinth {
-  opacity: 0.38;
-  stroke-width: 1;
-  animation-delay: 0.95s;
+.hero-art {
+  width: auto;
+  height: clamp(540px, 92vh, 1000px);
+  max-width: 100%;
+  object-fit: contain;
+  /* A arte vem sobre fundo preto; screen descarta o preto e deixa apenas o traço
+     luminoso sobre o fundo noturno da seção. */
+  mix-blend-mode: screen;
+  /* A base do busto dissolve no fundo em vez de terminar em corte reto. */
+  mask-image: linear-gradient(to bottom, #000 58%, rgb(0 0 0 / 0.55) 80%, transparent 97%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 58%, rgb(0 0 0 / 0.55) 80%, transparent 97%);
 }
 
 .hero-display {
@@ -525,7 +410,7 @@ section[id] {
   font-size: clamp(2.6rem, 5.2vw, 5.1rem);
   font-weight: 400;
   letter-spacing: -0.05em;
-  line-height: 0.9;
+  line-height: 1.04;
   pointer-events: none;
   text-align: left;
 }
@@ -537,6 +422,7 @@ section[id] {
 }
 
 .hero-display-line.line-1 {
+  margin-bottom: 0.1em;
   font-size: 0.86em;
 }
 
@@ -636,6 +522,33 @@ section[id] {
 
 .hero-socials {
   margin-top: 20px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+  padding: 0 28px;
+  border: 1px solid rgb(237 241 245 / 0.28);
+  border-radius: 7px;
+  background: rgb(237 241 245 / 0.06);
+  color: var(--paper-soft);
+  font-family: var(--font-editorial), serif;
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+  transition: background 240ms ease, border-color 240ms ease, color 240ms ease;
+}
+
+.hero-cta:hover,
+.hero-cta:focus-visible {
+  border-color: rgb(237 241 245 / 0.6);
+  background: rgb(237 241 245 / 0.13);
+  color: var(--paper);
 }
 
 .hero-socials a {
@@ -779,6 +692,28 @@ section[id] {
   object-fit: cover;
   object-position: 50% 35%;
   filter: grayscale(1) contrast(1.06) brightness(0.96);
+}
+
+/* Etiqueta de museu sob o retrato — o nome original riscado e corrigido à mão. */
+.about-portrait-caption {
+  margin-top: 18px;
+  color: rgb(75 89 103 / 0.72);
+  font-family: var(--font-editorial), serif;
+  font-size: 0.68rem;
+  font-style: italic;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.about-portrait-caption del {
+  color: rgb(75 89 103 / 0.44);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.about-portrait-caption ins {
+  color: var(--ink);
+  text-decoration: none;
 }
 
 .about-portrait-line {
@@ -941,15 +876,15 @@ section[id] {
 
 .chronicle-line {
   position: relative;
-  margin-left: 54px;
+  margin-left: 84px;
 }
 
 .timeline-pilaster {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: -82px;
-  width: 92px;
+  left: -112px;
+  width: 118px;
   height: 100%;
   filter: drop-shadow(3px 4px 5px rgb(43 54 65 / 0.12));
   pointer-events: none;
@@ -965,8 +900,8 @@ section[id] {
 .timeline-cap,
 .timeline-base {
   left: 0;
-  width: 92px;
-  height: 34px;
+  width: 118px;
+  height: 40px;
   border: 1px solid rgb(116 128 139 / 0.3);
   background: linear-gradient(180deg, #fbfcfd 0 18%, #eef1f3 18% 58%, #e1e6ea 58% 100%);
   box-shadow:
@@ -985,17 +920,17 @@ section[id] {
 }
 
 .timeline-shaft {
-  top: 28px;
-  bottom: 28px;
-  left: 21px;
-  width: 50px;
+  top: 34px;
+  bottom: 34px;
+  left: 26px;
+  width: 66px;
   border-inline: 1px solid rgb(112 124 135 / 0.24);
   background:
     repeating-linear-gradient(
       90deg,
-      transparent 0 8px,
-      rgb(91 104 116 / 0.1) 8px 9px,
-      rgb(255 255 255 / 0.42) 9px 10px
+      transparent 0 9px,
+      rgb(91 104 116 / 0.1) 9px 10px,
+      rgb(255 255 255 / 0.42) 10px 11px
     ),
     linear-gradient(90deg, #dbe0e4, #f3f5f6 22%, #e9edf0 50%, #f2f4f5 78%, #d9dfe3);
   box-shadow:
@@ -1125,7 +1060,34 @@ section[id] {
 
 /* Foundations */
 .foundations {
+  --spot-x: 50%;
+  --spot-y: 28%;
+  --spot-opacity: 0;
   padding: var(--section-space) var(--page-pad);
+}
+
+/* Holofote de galeria — a luz acompanha o cursor sobre as colunas.
+   As coordenadas chegam de Skills.tsx como custom properties. */
+.foundations-spot {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: radial-gradient(
+    circle 340px at var(--spot-x) var(--spot-y),
+    rgb(226 236 246 / 0.14),
+    rgb(163 183 203 / 0.055) 46%,
+    transparent 72%
+  );
+  opacity: var(--spot-opacity);
+  pointer-events: none;
+  transition: opacity 420ms ease;
+}
+
+/* Sem cursor para seguir, ou com movimento reduzido, a luz não entra em cena. */
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .foundations-spot {
+    display: none;
+  }
 }
 
 .foundations::before {
@@ -1834,11 +1796,6 @@ section[id] {
   text-transform: uppercase;
 }
 
-@keyframes bust-enter {
-  from { opacity: 0; transform: scale(0.86); }
-  to { opacity: 1; transform: scale(1); }
-}
-
 @keyframes title-reveal {
   from { opacity: 0; transform: translateY(26px); }
   to { opacity: 1; transform: translateY(0); }
@@ -1875,14 +1832,6 @@ section[id] {
 @media (max-width: 1180px) {
   .hero-display {
     font-size: clamp(3.8rem, 7.2vw, 5.6rem);
-  }
-
-  .hero-wireframe {
-    width: min(390px, 42vw);
-  }
-
-  .hero-bust-wrap {
-    width: min(430px, 46vw);
   }
 
   .pillar-shaft {
@@ -2091,10 +2040,6 @@ section[id] {
     padding-bottom: 92px;
   }
 
-  .hero-halo {
-    width: 130vw;
-  }
-
   .hero-shell {
     gap: 24px;
     grid-template-columns: 1fr;
@@ -2106,12 +2051,8 @@ section[id] {
     order: -1;
   }
 
-  .hero-wireframe {
-    width: min(300px, 82vw);
-  }
-
-  .hero-bust-wrap {
-    height: clamp(320px, 46vh, 430px);
+  .hero-art {
+    height: clamp(400px, 58vh, 560px);
   }
 
   .hero-display {
@@ -2176,25 +2117,25 @@ section[id] {
   }
 
   .chronicle-line {
-    margin-left: 36px;
+    margin-left: 44px;
   }
 
   .timeline-pilaster {
-    left: -50px;
-    width: 68px;
+    left: -64px;
+    width: 86px;
   }
 
   .timeline-cap,
   .timeline-base {
-    width: 68px;
-    height: 27px;
+    width: 86px;
+    height: 31px;
   }
 
   .timeline-shaft {
-    top: 22px;
-    bottom: 22px;
-    left: 15px;
-    width: 38px;
+    top: 26px;
+    bottom: 26px;
+    left: 21px;
+    width: 44px;
   }
 
   .chronicle-list > li {
@@ -2221,7 +2162,7 @@ section[id] {
   }
 
   .chronicle-diamond {
-    left: -43px;
+    left: -26px;
   }
 
   .pillar-grid,
@@ -2312,12 +2253,8 @@ section[id] {
     --page-pad: 20px;
   }
 
-  .hero-bust-wrap {
-    height: 340px;
-  }
-
-  .hero-wireframe {
-    width: 268px;
+  .hero-art {
+    height: 430px;
   }
 
   .hero-display {
@@ -2391,7 +2328,6 @@ section[id] {
   }
 
   .hero-letter,
-  .hero-bust-wrap,
   .hero-meta {
     opacity: 1;
   }
@@ -2941,13 +2877,6 @@ html.has-leaf-cursor select {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-bust path,
-  .hero-bust circle,
-  .hero-bust g {
-    animation: none;
-    stroke-dashoffset: 0;
-  }
-
   .contact-letter .letter-seal {
     animation: none;
   }
@@ -2967,6 +2896,13 @@ html.has-leaf-cursor select {
   stroke-width: 1.6;
 }
 
+/* As linhas escritas ficam mais leves que o contorno, para o desenho ter hierarquia
+   em vez de um traço único e chapado. */
+.education-mark .scholar-lines {
+  opacity: 0.55;
+  stroke-width: 1;
+}
+
 .education-mark .scholar-tassel {
   stroke: var(--bronze);
   transform-box: fill-box;
@@ -2983,4 +2919,268 @@ html.has-leaf-cursor select {
   .education-mark .scholar-tassel {
     animation: none;
   }
+}
+
+/* ── Boot veil ─────────────────────────────────────────────────────────── */
+.is-booting,
+.is-booting body {
+  overflow: hidden;
+}
+
+.boot-veil {
+  position: fixed;
+  z-index: 200000;
+  display: grid;
+  inset: 0;
+  place-items: center;
+  background: #05070a;
+  /* CSS clears the veil on its own, so a failed script can never trap the page */
+  animation: boot-clear 1.4s 1.2s forwards;
+}
+
+.boot-veil.is-ready {
+  animation: boot-clear 700ms forwards;
+}
+
+@keyframes boot-clear {
+  to { opacity: 0; visibility: hidden; }
+}
+
+.boot-mark {
+  display: grid;
+  justify-items: center;
+  gap: 22px;
+  animation: boot-rise 900ms both var(--editorial-ease);
+}
+
+.boot-meander {
+  width: min(240px, 54vw);
+  height: auto;
+  opacity: 0.4;
+}
+
+.boot-meander .meander-rail {
+  stroke: rgb(237 241 245 / 0.3);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.boot-meander .meander-key {
+  stroke: rgb(237 241 245 / 0.6);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.boot-name {
+  color: rgb(242 242 242 / 0.72);
+  font-family: var(--font-display), serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.5em;
+  text-indent: 0.5em;
+}
+
+.boot-bar {
+  width: 132px;
+  height: 1px;
+  overflow: hidden;
+  background: rgb(237 241 245 / 0.14);
+}
+
+.boot-bar::after {
+  display: block;
+  width: 100%;
+  height: 100%;
+  content: "";
+  transform-origin: left;
+  background: var(--bronze);
+  animation: boot-fill 2.1s ease-out forwards;
+}
+
+@keyframes boot-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes boot-rise {
+  from { opacity: 0; transform: translateY(14px); }
+}
+
+/* ── Scroll progress ───────────────────────────────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  z-index: 120;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: rgb(237 241 245 / 0.06);
+  pointer-events: none;
+}
+
+.scroll-progress-bar {
+  width: 100%;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, transparent, var(--bronze));
+}
+
+/* ── Roman numeral chapter index ───────────────────────────────────────── */
+.section-index {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 18px;
+  gap: 14px;
+  font-family: var(--font-display), serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.44em;
+  text-indent: 0.44em;
+}
+
+.section-index i {
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+.section-index-light {
+  color: #7f8a96;
+}
+
+.section-index-dark {
+  color: rgb(242 242 242 / 0.5);
+}
+
+.projects-heading-lockup .section-index,
+.about-copy .section-index {
+  justify-content: flex-start;
+  margin-bottom: 12px;
+}
+
+.about-copy .section-index i:first-child {
+  display: none;
+}
+
+/* ── Laurel flourish ───────────────────────────────────────────────────── */
+.laurel-flourish {
+  display: block;
+  width: clamp(150px, 18vw, 210px);
+  height: auto;
+  margin: 26px auto 0;
+  fill: none;
+  stroke: #8c96a2;
+  stroke-linejoin: round;
+  stroke-width: 1;
+}
+
+.laurel-flourish-light {
+  stroke: rgb(242 242 242 / 0.6);
+}
+
+.laurel-flourish .laurel-leaves path {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: 0 50%;
+  animation: laurel-open 620ms both var(--editorial-ease);
+}
+
+.laurel-flourish .laurel-boss circle {
+  fill: var(--bronze);
+  stroke: none;
+}
+
+@keyframes laurel-open {
+  from { opacity: 0; scale: 0.3; }
+  to { opacity: 1; scale: 1; }
+}
+
+.projects-laurel {
+  margin-top: clamp(56px, 6vw, 88px);
+}
+
+/* ── Corinthian capital above the contact invitation ───────────────────── */
+.contact-capital {
+  display: block;
+  width: clamp(150px, 16vw, 200px);
+  height: auto;
+  margin: 0 auto 26px;
+  fill: none;
+  opacity: 0.5;
+  stroke: var(--paper-soft);
+  stroke-linejoin: round;
+  stroke-width: 1;
+}
+
+.contact-capital circle {
+  fill: var(--bronze);
+  stroke: none;
+}
+
+/* ── Divider shimmer, once the fret has drawn itself ───────────────────── */
+.section-divider.is-drawn .meander-key {
+  animation: meander-draw 2.1s 180ms var(--editorial-ease) forwards,
+    meander-shimmer 7s 2.6s infinite ease-in-out;
+}
+
+@keyframes meander-shimmer {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ── Pillars rise as they enter ────────────────────────────────────────── */
+.pillar-reveal .pillar-card {
+  transform-origin: 50% 100%;
+  animation: pillar-rise 900ms both var(--editorial-ease);
+}
+
+@keyframes pillar-rise {
+  from { opacity: 0; transform: scaleY(0.94) translateY(18px); }
+}
+
+@media (max-width: 767px) {
+  .laurel-flourish {
+    width: 140px;
+  }
+
+  .contact-capital {
+    width: 132px;
+  }
+
+  .section-index {
+    font-size: 0.56rem;
+    letter-spacing: 0.34em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boot-veil {
+    animation: boot-clear 300ms forwards;
+  }
+
+  .boot-bar::after,
+  .boot-mark,
+  .pillar-reveal .pillar-card,
+  .laurel-flourish .laurel-leaves path {
+    animation: none;
+  }
+
+  .laurel-flourish .laurel-leaves path {
+    opacity: 1;
+  }
+
+  .section-divider.is-drawn .meander-key {
+    animation: none;
+  }
+}
+
+/* the About column is left-aligned, so its laurel is too */
+.laurel-flourish-start {
+  margin-inline: 0;
+}
+
+.principle-stage .laurel-flourish {
+  margin-top: 22px;
+  stroke: #97a1ad;
 }

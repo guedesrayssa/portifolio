@@ -20,7 +20,7 @@ export const copy = {
       principles: "Princípios",
       contact: "Contato",
     },
-    hero: { explore: "Explorar" },
+    hero: { explore: "Explorar", projects: "Ver projetos" },
     about: {
       title: "Sobre mim",
       bodyPrimary:
@@ -34,6 +34,9 @@ export const copy = {
       location: "São Paulo · Brasil",
       locationLabel: "Base",
       portraitAlt: "Retrato de Rayssa Guedes França",
+      portraitCaptionPrefix: "Retrato de",
+      portraitCaptionStruck: "Dorian Gray",
+      portraitCaptionName: "Rayssa Guedes",
     },
     trajectory: {
       eyebrow: "Crônicas de uma trajetória",
@@ -98,7 +101,7 @@ export const copy = {
       principles: "Principles",
       contact: "Contact",
     },
-    hero: { explore: "Explore" },
+    hero: { explore: "Explore", projects: "View projects" },
     about: {
       title: "About me",
       bodyPrimary:
@@ -112,6 +115,9 @@ export const copy = {
       location: "São Paulo · Brazil",
       locationLabel: "Based in",
       portraitAlt: "Portrait of Rayssa Guedes França",
+      portraitCaptionPrefix: "Portrait of",
+      portraitCaptionStruck: "Dorian Gray",
+      portraitCaptionName: "Rayssa Guedes",
     },
     trajectory: {
       eyebrow: "Chronicles of a journey",
@@ -170,7 +176,7 @@ export const experiencesEn: readonly Experience[] = [
     tags: ["Python"],
   },
   {
-    title: "Vacation Internship — AI & Data Science",
+    title: "Winter Internship — AI & Data Science",
     company: "Banco Safra",
     period: "JUL 2026 — AUG 2026",
     bullets: [
@@ -181,7 +187,7 @@ export const experiencesEn: readonly Experience[] = [
     tags: ["AI", "LLMs", "Python", "Prompt Engineering"],
   },
   {
-    title: "Vacation Internship — Supply Chain & Automation",
+    title: "Summer Internship — Supply Chain & Automation",
     company: "Compra Agora (Unilever)",
     period: "JAN 2026 — FEB 2026",
     bullets: [

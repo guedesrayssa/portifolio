@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { maxims } from "@/data/maxims";
 import { copy, maximsEn } from "@/data/translations";
 import { useLanguage } from "./LanguageProvider";
-import { OrbitEmblem } from "./Ornaments";
+import { LaurelFlourish, OrbitEmblem } from "./Ornaments";
+import { SectionIndex } from "./SectionIndex";
 
 export function Principles() {
   const { locale, isEnglish } = useLanguage();
@@ -51,6 +52,7 @@ export function Principles() {
       ref={sectionRef}
     >
       <div className="principle-stage">
+        <SectionIndex numeral="V" />
         <p className="principle-ordinal">
           0{active + 1} <span>/</span> 0{entries.length}
         </p>
@@ -67,6 +69,7 @@ export function Principles() {
           <i key={active} />
         </div>
         <blockquote>{text.quote}</blockquote>
+        <LaurelFlourish className="laurel-flourish" />
       </div>
     </section>
   );

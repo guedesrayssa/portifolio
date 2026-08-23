@@ -5,8 +5,9 @@ import { site } from "@/data/site";
 import { copy, siteEn } from "@/data/translations";
 import { AmbientCanvas } from "./AmbientCanvas";
 import { useLanguage } from "./LanguageProvider";
-import { SealedLetter } from "./Ornaments";
+import { CorinthianCapital, LaurelFlourish, SealedLetter } from "./Ornaments";
 import { Reveal } from "./Reveal";
+import { SectionIndex } from "./SectionIndex";
 
 export function Contact() {
   const { locale, isEnglish } = useLanguage();
@@ -30,10 +31,13 @@ export function Contact() {
       <AmbientCanvas className="ambient-canvas" />
       <div className="contact-inner">
         <Reveal className="contact-intro">
+          <CorinthianCapital className="contact-capital" />
+          <SectionIndex numeral="VI" tone="dark" />
           <SealedLetter className="contact-letter" />
           <p className="eyebrow">{text.eyebrow}</p>
           <h2 id="contact-title">{text.title}</h2>
           <p>{text.intro}</p>
+          <LaurelFlourish className="laurel-flourish laurel-flourish-light" />
         </Reveal>
 
         <Reveal>

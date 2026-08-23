@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import { CursorLeaf } from "./Ornaments";
 
-const POSITION_LERP = 0.15;
 const PETAL_POOL = 18;
 const PETAL_SPAWN_DISTANCE = 30;
 const LEAF_TIP_X = 9;
@@ -49,9 +48,9 @@ export function LeafCursor() {
       active: false,
     }));
 
-    const target = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-    const current = { x: target.x, y: target.y };
-    const spawnAnchor = { x: current.x, y: current.y };
+    const pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    const previous = { x: pointer.x, y: pointer.y };
+    const spawnAnchor = { x: pointer.x, y: pointer.y };
     let frame = 0;
     let mounted = false;
     let random = 0x2f6e2b1;
@@ -83,26 +82,14 @@ export function LeafCursor() {
     };
 
     const render = () => {
-      const previousX = current.x;
+      const velocityX = pointer.x - previous.x;
+      previous.x = pointer.x;
+      previous.y = pointer.y;
 
-      current.x += (target.x - current.x) * POSITION_LERP;
-      current.y += (target.y - current.y) * POSITION_LERP;
-
-      const velocityX = current.x - previousX;
-
-      // The leaf holds a fixed tilt: it drifts with the pointer, it never spins.
-      leaf.style.transform = `translate3d(${current.x - LEAF_TIP_X}px, ${current.y - LEAF_TIP_Y}px, 0)`;
-
-      if (!mounted) {
-        mounted = true;
-        root.dataset.ready = "true";
-        document.documentElement.classList.add("has-leaf-cursor");
-      }
-
-      if (Math.hypot(current.x - spawnAnchor.x, current.y - spawnAnchor.y) > PETAL_SPAWN_DISTANCE) {
-        spawnAnchor.x = current.x;
-        spawnAnchor.y = current.y;
-        spawnPetal(current.x, current.y, velocityX);
+      if (Math.hypot(pointer.x - spawnAnchor.x, pointer.y - spawnAnchor.y) > PETAL_SPAWN_DISTANCE) {
+        spawnAnchor.x = pointer.x;
+        spawnAnchor.y = pointer.y;
+        spawnPetal(pointer.x, pointer.y, velocityX);
       }
 
       for (const petal of petals) {
@@ -127,10 +114,20 @@ export function LeafCursor() {
       frame = window.requestAnimationFrame(render);
     };
 
+    // The leaf is written straight from the event, so it tracks the pointer with no lag.
+    // Only the petals it sheds are animated on a frame loop.
     const handleMove = (event: PointerEvent) => {
       if (event.pointerType !== "mouse") return;
-      target.x = event.clientX;
-      target.y = event.clientY;
+      pointer.x = event.clientX;
+      pointer.y = event.clientY;
+      leaf.style.transform = `translate3d(${pointer.x - LEAF_TIP_X}px, ${pointer.y - LEAF_TIP_Y}px, 0)`;
+
+      // Reveal only once the leaf sits under a real pointer position.
+      if (!mounted) {
+        mounted = true;
+        root.dataset.ready = "true";
+        document.documentElement.classList.add("has-leaf-cursor");
+      }
     };
 
     const handleOver = (event: PointerEvent) => {

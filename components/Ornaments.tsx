@@ -5,25 +5,6 @@ type OrnamentProps = {
   style?: CSSProperties;
 };
 
-export function HeroWireframe({ className }: OrnamentProps) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 400 500"
-      fill="none"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <path d="M200 7 378 112l-16 278-162 103L38 390 22 112 200 7Z" />
-      <path d="m200 7 74 88 104 17-68 93 52 185-162-50L38 390l52-185-68-93 104-17 74-88Z" />
-      <path d="M126 95h148l36 110-110 135L90 205l36-110ZM22 112l178 228 178-228M38 390l162-50 162 50M200 7v486" />
-      <circle cx="200" cy="205" r="110" />
-      <circle cx="200" cy="205" r="72" />
-      <path d="M90 205h220M126 95l74 245 74-245M38 390l52-185 110 288 110-288 52 185" />
-    </svg>
-  );
-}
-
 export function BotanicalBranch({ className }: OrnamentProps) {
   return (
     <svg
@@ -243,7 +224,9 @@ export function CursorLeaf({ className, style }: OrnamentProps) {
   );
 }
 
-/* Mortarboard over a stack of books, for the studies block. */
+/* Open book with a ribbon marker, for the studies block. The two leaves are drawn as
+   closed curves that meet at the spine, so the fold reads from the geometry rather than
+   from a seam line; the block below each leaf gives the pages their thickness. */
 export function ScholarMark({ className }: OrnamentProps) {
   return (
     <svg
@@ -253,58 +236,134 @@ export function ScholarMark({ className }: OrnamentProps) {
       aria-hidden="true"
       focusable="false"
     >
-      <path d="M10 74h100v14H10zM18 60h84v14H18zM26 46h68v14H26z" />
-      <path d="M10 81h100M18 67h84M26 53h68" />
-      <path d="M18 74v14M102 74v14M26 60v14M94 60v14M34 46v14M86 46v14" />
-      <path d="M60 10 12 27l48 14 48-14L60 10ZM60 41v5" />
-      <path className="scholar-tassel" d="M108 27v17" />
-      <path className="scholar-tassel" d="M104 44h8l-4 9-4-9ZM106 53v6M108 53v7M110 53v6" />
+      <path d="M60 30C50 22 34 18 16 19v38c18-1 34 3 44 11Z" />
+      <path d="M60 30c10-8 26-12 44-11v38c-18-1-34 3-44 11Z" />
+      <path d="M16 57v4c18-1 34 3 44 11M104 57v4c-18-1-34 3-44 11" />
+      <g className="scholar-lines">
+        <path d="M26 34c9-3 18-2 26 2M26 42c9-3 18-2 26 2M26 50c9-3 18-2 26 2" />
+        <path d="M94 34c-9-3-18-2-26 2M94 42c-9-3-18-2-26 2M94 50c-9-3-18-2-26 2" />
+      </g>
+      <g className="scholar-tassel">
+        <path d="M60 72v10" />
+        <path d="M55 82h10l-5 6-5-6Z" />
+      </g>
     </svg>
   );
 }
 
-/* Geometric line-art bust: a classical portrait rebuilt from facets, no fills. */
-export function GeometricBust({ className }: OrnamentProps) {
+/* An almond leaf pointing along `angle`, used to build laurel sprigs. */
+function leafPath(x: number, y: number, angle: number, length: number, width: number) {
+  const round = (n: number) => Math.round(n * 10) / 10;
+  const dx = Math.cos(angle);
+  const dy = Math.sin(angle);
+  const px = -dy;
+  const py = dx;
+  const tip = [x + dx * length, y + dy * length];
+  const c1 = [x + dx * length * 0.4 + px * width, y + dy * length * 0.4 + py * width];
+  const c2 = [x + dx * length * 0.4 - px * width, y + dy * length * 0.4 - py * width];
+  return (
+    `M${round(x)} ${round(y)}` +
+    `Q${round(c1[0])} ${round(c1[1])} ${round(tip[0])} ${round(tip[1])}` +
+    `Q${round(c2[0])} ${round(c2[1])} ${round(x)} ${round(y)}Z`
+  );
+}
+
+const LAUREL_SPRIGS = [-1, 1].flatMap((side) =>
+  Array.from({ length: 5 }, (_, index) => {
+    const step = index / 4;
+    const x = 90 + side * (16 + step * 62);
+    const y = 24 - step * 9;
+    const lean = side === -1 ? Math.PI : 0;
+    return [
+      leafPath(x, y, lean + side * -0.62, 17 - step * 3, 5.2 - step * 0.7),
+      leafPath(x, y + 3, lean + side * 0.5, 15 - step * 3, 4.6 - step * 0.6),
+    ];
+  }).flat(),
+);
+
+const LAUREL_STEMS = [
+  "M84 24C64 27 40 24 14 15",
+  "M96 24c20 3 44 0 70-9",
+];
+
+/* Laurel flourish that closes a section heading. */
+export function LaurelFlourish({ className }: OrnamentProps) {
   return (
     <svg
       className={className}
-      viewBox="0 0 400 560"
+      viewBox="0 0 180 44"
       fill="none"
       aria-hidden="true"
       focusable="false"
     >
-      <g className="bust-hair">
-        <path d="M200 34 268 56l38 58 12 78-6 76 10 74 12 60" />
-        <path d="M200 34 132 56 94 114l-12 78 6 76-10 74-12 60" />
-        <path d="m132 56 24 42-38 60 26 44-22 56 20 64-14 62M268 56l-24 42 38 60-26 44 22 56-20 64 14 62" />
-        <path d="m94 114 62 34M306 114l-62 34M82 192l38 26M318 192l-38 26M88 268l40-18M312 268l-40-18M78 342l46 8M322 342l-46 8" />
+      <g className="laurel-stem">
+        {LAUREL_STEMS.map((d) => (
+          <path d={d} key={d} />
+        ))}
       </g>
+      <g className="laurel-leaves">
+        {LAUREL_SPRIGS.map((d, index) => (
+          <path d={d} key={d} style={{ animationDelay: `${index * 45}ms` }} />
+        ))}
+      </g>
+      <g className="laurel-boss">
+        <circle cx="90" cy="24" r="5" />
+        <path d="M90 15v18M81 24h18" />
+      </g>
+    </svg>
+  );
+}
 
-      <g className="bust-face">
-        <path d="M200 62 254 82l30 52 6 62-12 52-30 46-48 26-48-26-30-46-12-52 6-62 30-52 54-20Z" />
-        <path d="M200 62v258M146 134h108M124 196h152M136 258h128M158 310h84" />
-        <path d="m146 134 54-72 54 72M124 196l76-134 76 134M136 258l64-196 64 196" />
-        <path d="M146 134 124 196l12 62 22 52M254 134l22 62-12 62-22 52" />
-      </g>
+/* Egg-and-dart band, the second divider motif. */
+const EGG_UNIT = 30;
+const EGG_UNITS = 40;
+export const EGG_WIDTH = EGG_UNIT * EGG_UNITS;
 
-      <g className="bust-features">
-        <path d="m150 186 30-8 26 12-26 10-30-14ZM250 186l-30-8-26 12 26 10 30-14Z" />
-        <path d="m200 170-14 74 14 14 14-14-14-74Z" />
-        <path d="m174 274 26-10 26 10-26 16-26-16Z" />
-        <path d="M152 160h34M214 160h34" />
-      </g>
+const eggAndDart = Array.from({ length: EGG_UNITS }, (_, index) => {
+  const x = index * EGG_UNIT;
+  const oval = (cx: number, rx: number, ry: number) =>
+    `M${cx - rx} 13C${cx - rx} ${13 - ry * 0.75} ${cx - rx * 0.55} ${13 - ry} ${cx} ${13 - ry}` +
+    `C${cx + rx * 0.55} ${13 - ry} ${cx + rx} ${13 - ry * 0.75} ${cx + rx} 13` +
+    `C${cx + rx} ${13 + ry * 0.75} ${cx + rx * 0.55} ${13 + ry} ${cx} ${13 + ry}` +
+    `C${cx - rx * 0.55} ${13 + ry} ${cx - rx} ${13 + ry * 0.75} ${cx - rx} 13Z`;
+  return `${oval(x + 11, 8, 9)}${oval(x + 11, 5, 5.6)}M${x + 25} 3l3 9-3 10-3-10z`;
+}).join("");
 
-      <g className="bust-body">
-        <path d="M176 300v54M224 300v54" />
-        <path d="M176 354c-30 6-56 24-80 44l-36 28M224 354c30 6 56 24 80 44l36 28" />
-        <path d="m176 354 24 20 24-20M200 374v94" />
-        <path d="M60 426v42M340 426v42M60 468h280" />
-        <path d="m96 442 104 38 104-38M140 462l60 16 60-16" />
-      </g>
+export function EggAndDartDivider({ className }: OrnamentProps) {
+  return (
+    <svg
+      className={className}
+      viewBox={`0 0 ${EGG_WIDTH} 26`}
+      fill="none"
+      preserveAspectRatio="xMidYMid meet"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path className="meander-rail" d={`M0 1h${EGG_WIDTH}M0 25h${EGG_WIDTH}`} />
+      <path className="meander-key" d={eggAndDart} />
+    </svg>
+  );
+}
 
-      <g className="bust-plinth">
-        <path d="M96 468h208v34H96zM80 502h240v30H80zM66 532h268v24H66z" />
-      </g>
+/* Corinthian capital: acanthus and volutes above the contact invitation. */
+export function CorinthianCapital({ className }: OrnamentProps) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 170 86"
+      fill="none"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M4 4h162v11H4zM14 15h142" />
+      <path d="M28 15c0 20 9 34 24 41M142 15c0 20-9 34-24 41" />
+      <path d="M26 20C16 24 13 34 21 40C28 45 36 41 37 34C38 28 33 25 28 27" />
+      <path d="M144 20c10 4 13 14 5 20-7 5-15 1-16-6-1-6 4-9 9-7" />
+      <path d="M62 15c-3 22 3 40 23 54 20-14 26-32 23-54" />
+      <path d="M46 22c-3 18 2 34 16 45M124 22c3 18-2 34-16 45" />
+      <path d="M85 32v38M74 43c5 7 8 15 8 25M96 43c-5 7-8 15-8 25" />
+      <path d="M40 70h90M30 70h110M36 78h98" />
+      <circle cx="85" cy="24" r="4" />
     </svg>
   );
 }

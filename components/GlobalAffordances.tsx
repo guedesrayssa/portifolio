@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LuMenu, LuX } from "react-icons/lu";
 import { copy } from "@/data/translations";
 import { useLanguage } from "./LanguageProvider";
@@ -14,6 +14,7 @@ const destinations = [
 ] as const;
 
 export function GlobalAffordances() {
+  const progressRef = useRef<HTMLDivElement>(null);
   const [showTop, setShowTop] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("inicio");
@@ -25,6 +26,24 @@ export function GlobalAffordances() {
     update();
     window.addEventListener("scroll", update, { passive: true });
     return () => window.removeEventListener("scroll", update);
+  }, []);
+
+  // Written straight to the DOM: this runs on every scroll frame.
+  useEffect(() => {
+    const bar = progressRef.current;
+    if (!bar) return;
+    const update = () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = scrollable > 0 ? Math.min(1, window.scrollY / scrollable) : 0;
+      bar.style.transform = `scaleX(${ratio})`;
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
   }, []);
 
   useEffect(() => {
@@ -50,6 +69,10 @@ export function GlobalAffordances() {
 
   return (
     <>
+      <div className="scroll-progress" aria-hidden="true">
+        <div className="scroll-progress-bar" ref={progressRef} />
+      </div>
+
       <header className="global-chrome">
         <a className="chrome-mark" href="#inicio" aria-label={text.a11y.goHome} onClick={closeMenu}>
           <MementoSkull className="chrome-skull" />

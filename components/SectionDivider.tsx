@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MeanderDivider } from "./Ornaments";
+import { EggAndDartDivider, MeanderDivider } from "./Ornaments";
 
 type SectionDividerProps = {
   tone?: "dark" | "light";
+  motif?: "meander" | "egg";
 };
 
-export function SectionDivider({ tone = "dark" }: SectionDividerProps) {
+export function SectionDivider({ tone = "dark", motif = "meander" }: SectionDividerProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [drawn, setDrawn] = useState(false);
 
@@ -31,12 +32,12 @@ export function SectionDivider({ tone = "dark" }: SectionDividerProps) {
 
   return (
     <div
-      className={`section-divider section-divider-${tone}${drawn ? " is-drawn" : ""}`}
+      className={`section-divider section-divider-${tone} section-divider-${motif}${drawn ? " is-drawn" : ""}`}
       ref={ref}
       role="separator"
       aria-hidden="true"
     >
-      <MeanderDivider className="meander" />
+      {motif === "egg" ? <EggAndDartDivider className="meander" /> : <MeanderDivider className="meander" />}
     </div>
   );
 }

@@ -4,6 +4,8 @@ import Image from "next/image";
 import { copy } from "@/data/translations";
 import { useLanguage } from "./LanguageProvider";
 import { Reveal } from "./Reveal";
+import { LaurelFlourish } from "./Ornaments";
+import { SectionIndex } from "./SectionIndex";
 import { SocialLinks } from "./SocialLinks";
 
 export function About() {
@@ -25,10 +27,18 @@ export function About() {
               />
               <span className="about-portrait-line" aria-hidden="true" />
             </div>
+            {/* Etiqueta de museu: o título original é corrigido à mão, como numa
+                ficha de acervo em que o retratado foi identificado depois. */}
+            <figcaption className="about-portrait-caption">
+              {text.portraitCaptionPrefix}{" "}
+              <del>{text.portraitCaptionStruck}</del>{" "}
+              <ins>{text.portraitCaptionName}</ins>
+            </figcaption>
           </figure>
         </Reveal>
 
         <Reveal className="about-copy" delay={0.12}>
+          <SectionIndex numeral="I" />
           <h2 id="about-title">{text.title}</h2>
           <div className="about-rule" aria-hidden="true"><i /></div>
           <p>{text.bodyPrimary}</p>
@@ -48,6 +58,7 @@ export function About() {
             </div>
           </dl>
           <SocialLinks className="about-socials" />
+          <LaurelFlourish className="laurel-flourish laurel-flourish-start" />
         </Reveal>
       </div>
     </section>

@@ -1,4 +1,5 @@
 import { About } from "@/components/About";
+import { BootVeil } from "@/components/BootVeil";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { GlobalAffordances } from "@/components/GlobalAffordances";
@@ -40,17 +41,18 @@ export default function Home() {
   return (
     <LanguageProvider>
       <MotionProvider>
+        <BootVeil />
         <LocalizedSkipLink />
         <GlobalAffordances />
         <LeafCursor />
         <main id="conteudo">
           <Hero />
           <About />
-          <SectionDivider tone="light" />
+          <SectionDivider tone="light" motif="egg" />
           <Trajectory />
           <SectionDivider tone="dark" />
           <Skills />
-          <SectionDivider tone="light" />
+          <SectionDivider tone="light" motif="egg" />
           <Projects />
           <SectionDivider tone="light" />
           <Principles />

@@ -6,8 +6,9 @@ import { projects } from "@/data/projects";
 import { site } from "@/data/site";
 import { copy, projectsEn } from "@/data/translations";
 import { useLanguage } from "./LanguageProvider";
-import { LibraryShelf } from "./Ornaments";
+import { LaurelFlourish, LibraryShelf } from "./Ornaments";
 import { Reveal } from "./Reveal";
+import { SectionIndex } from "./SectionIndex";
 import { TagList } from "./TagList";
 
 type ProjectCoverProps = {
@@ -43,6 +44,7 @@ export function Projects() {
           <div className="projects-heading-lockup">
             <LibraryShelf className="projects-shelf" />
             <div>
+              <SectionIndex numeral="IV" />
               <p className="eyebrow">{text.eyebrow}</p>
               <h2 id="projects-title">{text.title}</h2>
             </div>
@@ -88,6 +90,10 @@ export function Projects() {
             );
           })}
         </div>
+
+        <Reveal className="projects-laurel">
+          <LaurelFlourish className="laurel-flourish" />
+        </Reveal>
 
         <Reveal className="projects-cta">
           <a className="corner-button" href={site.github} target="_blank" rel="noopener noreferrer">

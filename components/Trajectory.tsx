@@ -3,8 +3,9 @@
 import { education } from "@/data/education";
 import { experiences } from "@/data/experiences";
 import { copy, educationEn, experiencesEn } from "@/data/translations";
-import { BotanicalBranch, ScholarMark } from "./Ornaments";
+import { LaurelFlourish, ScholarMark } from "./Ornaments";
 import { Reveal } from "./Reveal";
+import { SectionIndex } from "./SectionIndex";
 import { TagList } from "./TagList";
 import { useLanguage } from "./LanguageProvider";
 
@@ -18,9 +19,10 @@ export function Trajectory() {
     <section className="chronicles paper-section" id="trajetoria" aria-labelledby="chronicles-title">
       <div className="chronicles-container">
         <Reveal className="editorial-heading editorial-heading-dark">
-          <BotanicalBranch className="branch-ornament" />
+          <SectionIndex numeral="II" />
           <p className="eyebrow">{text.eyebrow}</p>
           <h2 id="chronicles-title">{text.title}</h2>
+          <LaurelFlourish className="laurel-flourish" />
         </Reveal>
 
         <div className="chronicle-line">
