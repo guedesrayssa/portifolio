@@ -9,6 +9,8 @@ import tseslint from "typescript-eslint";
 
 const eslintConfig = defineConfig([
   globalIgnores([
+    // plugin skills install their own sample sources here
+    ".claude/**",
     ".next/**",
     "dist/**",
     "out/**",
