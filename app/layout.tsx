@@ -28,12 +28,12 @@ const body = localFont({
 const title = "Rayssa Guedes França | Software Engineer";
 const description =
   "Portfolio of Rayssa Guedes França, software engineer and Computer Science student at Inteli, focused on software engineering and artificial intelligence.";
-const configuredUrl =
+// NEXT_PUBLIC_SITE_URL wins; otherwise Vercel supplies the deployment host.
+const vercelHost =
+  process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
+const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : undefined);
-const socialImage = configuredUrl ? new URL("/og-engineer.png", configuredUrl).toString() : undefined;
+  (vercelHost ? `https://${vercelHost}` : "http://localhost:3000");
 
 export const metadata: Metadata = {
   title,
@@ -50,12 +50,8 @@ export const metadata: Metadata = {
     "Next.js",
     "Ciência da Computação",
   ],
-  ...(configuredUrl
-    ? {
-        metadataBase: new URL(configuredUrl),
-        alternates: { canonical: "/" },
-      }
-    : {}),
+  metadataBase: new URL(siteUrl),
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -63,25 +59,12 @@ export const metadata: Metadata = {
     title,
     description,
     siteName: "Rayssa Guedes França",
-    ...(socialImage
-      ? {
-          url: configuredUrl,
-          images: [
-            {
-              url: socialImage,
-              width: 1730,
-              height: 909,
-              alt: "Rayssa Guedes França — Software Engineer",
-            },
-          ],
-        }
-      : {}),
+    url: siteUrl,
   },
   twitter: {
-    card: socialImage ? "summary_large_image" : "summary",
+    card: "summary_large_image",
     title,
     description,
-    ...(socialImage ? { images: [socialImage] } : {}),
   },
   robots: {
     index: true,
