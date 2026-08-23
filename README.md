@@ -4,8 +4,7 @@
 
 **Software Engineer · Computer Science @ Inteli**
 
-Personal portfolio — a single-page classical editorial site
-built with Next.js, hand-drawn SVG ornaments and no UI framework.
+Bilingual personal portfolio built as a single-page editorial experience with Next.js.
 
 [Live site](https://rayssaguedes.vercel.app) ·
 [LinkedIn](https://www.linkedin.com/in/rayssaguedess) ·
@@ -13,106 +12,73 @@ built with Next.js, hand-drawn SVG ornaments and no UI framework.
 
 </div>
 
----
+## About
 
-## About me
+I am a Software Engineer and Computer Science student focused on software engineering
+and artificial intelligence. The site contains my experience, education and selected
+projects.
 
-I am a Computer Science student at **Inteli** (full scholarship, 2025–2028), after
-starting my journey in Science and Technology at **UFABC** (2023–2024). My focus is
-**software engineering and artificial intelligence**.
+## Construction
 
-Inteli teaches through **Project-Based Learning**: 16 projects across the degree, each
-built with a real company. So far I have delivered for **Mars, Chilli Beans, Copel,
-Suzano, Banco PAN and Rede Globo** — applying software development, data, AI,
-optimisation, cloud and product in practice.
+- **Next.js 16, React 19 and TypeScript** provide the App Router, strict typing, image
+  handling and generated metadata.
+- **Tailwind CSS 4 and custom CSS** define the responsive editorial layout without a UI
+  component library.
+- **Framer Motion, Canvas and CSS keyframes** power reveals, particles, transitions and
+  the custom leaf cursor.
+- **Inline SVG components** generate the classical ornaments and section dividers.
+- **Local fonts** avoid external font requests.
+- **Data-driven content** separates projects, experience, skills and translations from
+  the visual components.
+- **Accessibility** includes semantic landmarks, keyboard navigation, a skip link and
+  reduced-motion support.
 
-Outside the classroom I am **Vice President of Inteli Júnior**, a 60+ member technology
-junior enterprise, and take part in **EchoSec** (cybersecurity society) and the
-**Inteli Consulting Society**.
-
-Professionally I have worked on AI agent ecosystems at **Banco Safra**, supply-chain
-automation at **Compra Agora (Unilever)**, and data and process improvement at Inteli.
-
-## Selected work
-
-| Project | Client | Stack |
-|---|---|---|
-| Telemetry and monitoring platform | Grupo Globo (Globoplay) | Python · React · Docker · AWS |
-| Credit limit optimisation model | Banco Pan | Python · React · PostgreSQL · OR-Tools |
-| Wildfire response optimisation | Suzano | Java · Spring Boot · Next.js · PostgreSQL |
-| Predictive model for store expansion | Chilli Beans | Python · scikit-learn |
-
-## The site itself
-
-A single page, three chapters deep, alternating dark and light surfaces:
-hero → about → chronicles → foundations → selected works → maxims → contact → memento.
-
-Everything decorative is drawn in code. There are no icon packs, no illustration
-libraries and no images beyond the portrait and the project covers:
-
-- **Triangulated portrait** — the hero bust is a Delaunay mesh generated from a facial
-  landmark point cloud, so the facets fold along the brow, eyes, nose and lips.
-- **Leaf pointer** — a custom cursor that tracks the pointer with no smoothing lag and
-  sheds petals as it travels. Disabled for coarse pointers and reduced motion.
-- **Greek meander dividers** — the fret between sections is generated unit by unit and
-  traced on scroll with `stroke-dashoffset`.
-- **Ambient particle fields** — a canvas of drifting motes on every dark section.
-- **Hand-drawn ornaments** — memento skull, library shelf, sealed letter, mortarboard,
-  foundation emblem and architectural pillars, all inline SVG.
-
-Bilingual (English by default, Portuguese via the header toggle), keyboard navigable,
-and every animation respects `prefers-reduced-motion`.
-
-## Tech
-
-| | |
-|---|---|
-| Framework | Next.js 16 (App Router, React 19) |
-| Language | TypeScript |
-| Styling | Tailwind CSS 4 tokens + hand-written CSS |
-| Motion | Framer Motion, canvas, CSS keyframes |
-| Type | Cinzel Decorative, Cinzel, Inter (self-hosted) |
-| Deploy | Vercel |
-
-## Running locally
-
-```bash
-npm install
-npm run dev      # http://localhost:3000
-```
-
-```bash
-npm run build    # production build
-npm start        # serve the production build
-npm run lint     # eslint
-```
-
-## Configuration
-
-Copy `.env.example` to `.env.local` and set the public URL used for canonical links and
-social cards. On Vercel this is inferred from the deployment, so the variable is optional.
-
-```
-NEXT_PUBLIC_SITE_URL=https://your-domain.com
-```
+The page is composed in `app/page.tsx`. Sections and interactions live in `components/`,
+while bilingual content and portfolio records live in `data/`.
 
 ## Structure
 
+```text
+app/          routes, page composition, fonts, styles and metadata
+components/   sections, providers, interactions and SVG ornaments
+data/         portfolio content and translations
+public/       portrait, hero artwork and project covers
+types/        shared TypeScript models
 ```
-app/         layout, page, global styles, generated icon and OG image
-components/  section components, ornaments, cursor, providers
-data/        content — experience, education, projects, skills, maxims, translations
-public/      portrait and project covers
-types/       shared content types
+
+## Root files
+
+Configuration files such as `package.json`, `package-lock.json`, `tsconfig.json`,
+`next.config.ts`, `eslint.config.mjs` and `postcss.config.mjs` must stay at the
+repository root and be committed. They define dependencies, reproducible installs,
+TypeScript, Next.js, lint and CSS processing.
+
+Only generated or local files are ignored, including `node_modules/`, `.next/`,
+`out/`, `*.tsbuildinfo`, `next-env.d.ts` and `.env.local`.
+
+## Local development
+
+Requires Node.js 24.
+
+```bash
+npm install
+npm run dev
 ```
 
-Content lives entirely in `data/`. Editing a project or an experience never means
-touching a component.
+Open `http://localhost:3000`. Before publishing, validate the project with:
 
----
+```bash
+npm run lint
+npm run build
+```
 
-<div align="center">
+## Environment and deployment
 
-*Memento Mori*
+`NEXT_PUBLIC_SITE_URL` is optional and sets canonical and social URLs:
 
-</div>
+```bash
+NEXT_PUBLIC_SITE_URL=https://your-domain.com
+```
+
+Copy `.env.example` to `.env.local` when configuring it locally. On Vercel, select the
+**Next.js** preset and keep the detected build, install and output settings.
